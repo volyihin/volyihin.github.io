@@ -1,0 +1,1946 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JBake</title>
+    <link>http://jbake.org</link>
+    <atom:link href="http://jbake.org/feed.xml" rel="self" type="application/rss+xml" />
+    <description>JBake Bootstrap Template</description>
+    <language>en-gb</language>
+    <pubDate>Thu, 13 Aug 2015 12:39:34 +0400</pubDate>
+    <lastBuildDate>Thu, 13 Aug 2015 12:39:34 +0400</lastBuildDate>
+
+    <item>
+      <title>Удаление символов из строки</title>
+      <link>http://jbake.org/blog/2015/remove_specified_characters.html</link>
+      <pubDate>Wed, 24 Jun 2015 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2015/remove_specified_characters.html</guid>
+      	<description>
+	&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_Задача&quot;&gt;Задача&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Написать эффективную функцию, которая удалит символы из строки.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;literalblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;string removeChars( string str, string remove );&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Любой символ, который содержиться в строке &lt;code&gt;remove&lt;/code&gt; должен быть удален из &lt;code&gt;str&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Например, дана строка &lt;code&gt;Battle of the Vowels: Hawaii vs. Grozny&lt;/code&gt;  нужно удалить &lt;code&gt;aeiou&lt;/code&gt;, функция должна вернуть вот такой результат - &lt;code&gt;Bttl f th Vwls: Hw vs. Grzny&lt;/code&gt;. Прокомментировать любое принятое решение в процессе разработки алгоритма и определить эффективность решения.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Эту задачу можно разделить на две части. Для каждого символа нужно определить - должен ли он быть удален. Потом, само удаление соотвествующего символа. Сначала мы обсудим удаление символа.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Удаление символа из строки алгоритмически эквивалентно удалению элемента из массива. Массив обычно хранится одним сплошным блоком в памяти, так что нельзя просто так удалить элемент из середины, как можно было бы сделать, если это был связный список.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Вместо этого в массиве нужно переставить элементы таким образом, чтобы  вместо удаляемого элемента сразу шли следующие за ним. Например, если мы хотим удалить символ &lt;code&gt;c&lt;/code&gt; из строки &lt;code&gt;abcd&lt;/code&gt;, то мы можем либо двинуть символы &lt;code&gt;ab&lt;/code&gt; на одну позицию вперед, либо сдвинуть символ &lt;code&gt;d&lt;/code&gt; на одну позицию назад. Оба подхода, конечно, приводят онк одному и тому же результату - &lt;code&gt;abd&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/Exif.jpg&quot; alt=&quot;Exif&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Кроме того, что нужно подвинуть данные, также необходимо уменьшить размер строки на один символ. Получается, в первом случае необходимо будет уничтожить первый элемент, а во втором - последний. Во многих языках гораздо легче удалять элемент с конца массива(либо уменьшая длинну строки на один, либо записывая последним элементом &lt;code&gt;null&lt;/code&gt;, в зависимости от языка) чем с начала, поэтому сдвигать символы в начало будет наилучшим вариантом.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Каково время работы алгоритма в наихудшем случае, когда нужно удалить все символы в строке str? Для каждого удаления потребуется сдвигать все остальные символы назад на одну позицию Если строка будет длинны &lt;code&gt;n&lt;/code&gt;, то потребуется сдвинуть последний сивол &lt;code&gt;n - 1&lt;/code&gt; раз, предпоследний - &lt;code&gt;n - 2&lt;/code&gt; раза, и так далее, то есть в итоге &apos;O(n^2)&apos; на удаление.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/Exif.jpg&quot; alt=&quot;Exif&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Если начать удалять символы строки с конца, то будет немного эффективнее, но сложность останется все равно &lt;code&gt;O(n^2)&lt;/code&gt; в худшем случае. Сдвигать один и тот же символ несколько раз подряд не очень эффективно. Как избежать этого? Что если создать какой-нибудь строковый буфер и произвоть все модификации в нем вместо исходной строки? Затем мы просто сможем копировать символы из буфера, пропуская те символы, которые хотим удалить. Когда закончится построение результирующей строки, то можно просто скопировать ее в исходную. Таким образом каждый символ передвигается как минимум 2 раза, что в итоге дает удаление за &lt;code&gt;O(n)&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Однако мы приобретаем затраты на память этого буфера, который будет такого же размера, как исходная строка, а также затраты на копирование обратно уже итоговой строки.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;image::../../img/Exif.jpg[]
+
+ This way, you move each character at most twice, yielding
+O(n) deletion. However, you’ve incurred the memory overhead of a temporary buffer the same
+size as the original string, and the time overhead of copying the modified string back over the original
+string. Is there any way you can avoid these penalties while retaining your O(n) algorithm?
+To implement the O(n) algorithm just described, you need to track a source position for the read
+location in the original string and a destination position for the write position in the temporary buffer.
+These positions both start at zero. The source position is incremented every time you read, and
+the destination position is incremented every time you write. In other words, when you copy a character,
+you increment both positions, but when you delete a character, you increment only the source
+position. This means the source position is always the same as or ahead of the destination position.
+After you read a character from the original string (that is, the source position has advanced past it),
+you no longer need that character — because you’re just going to copy the modified string over it.
+Because the destination position in the original string is always a character you don’t need anymore,
+you can write directly into the original string, eliminating the temporary buffer entirely. This is still
+an O(n) algorithm but without the memory and time overhead of the earlier version.
+Now that you know how to delete characters, consider the task of deciding whether to delete a particular
+character. The easiest way to do this is to compare the character to each character in remove
+and delete it if it matches any of them. How efficient is this? If str is n characters long and remove is
+m characters long, then in the worst case you make m comparisons for each of n characters, so the
+algorithm is O(nm). You can’t avoid checking each of the n characters in str, but perhaps you can
+make the lookup that determines whether a given character is in remove better than O(m).
+If you’ve already read the solution to “Find the First Nonrepeated Character,” this should sound
+familiar. Just as you did in that problem, you can use remove to build an array or hash table that
+has constant time lookup, thus giving an O(n) solution. The trade-offs between hash tables and
+arrays are the same as previously discussed. In this case, an array is most appropriate when str
+and remove are long and characters have relatively few possible values (for example, ASCII strings).
+A hash table may be a better choice when str and remove are short or characters have many possible
+values (for example, Unicode strings). Either choice could be acceptable as long as you justify it
+appropriately. This time, you’re told that the inputs are ASCII strings, so the array wouldn’t be too
+big; because the previous implementation used a hash table, try using an array for this one.&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Groovy. Быстрая сортировка.</title>
+      <link>http://jbake.org/blog/2015/groovy_quicksort.html</link>
+      <pubDate>Mon, 8 Jun 2015 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2015/groovy_quicksort.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Этот алгоритм, наверное, является самым популярным алгоритмом сортировки. Он весьма прост, быстр и сортирует задействуя минимальное количество дополнительной памяти. Для большинства задач, где требуется сортировка &quot;Quick sort&quot; является хорошим выбором.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;// массив, который будем сортировать
+def a = [1,5,7,8,45,7,45,34,45,78,9]
+
+/**
+ * Печать массива. Наверное, такой метод, уже есть, елнь было искать.
+ */
+void printArr(a) {
+
+    a.each{i -&amp;gt;
+
+        print i + &apos;, &apos;
+
+    }
+
+}
+
+/**
+ * Сортировка
+ */
+void sort(a) {
+    sort(a, 0, a.size() - 1)
+}
+
+void sort(a, s, e) {
+    int index = partition(a, s, e)
+
+
+    printArr(a);
+
+    if (s &amp;lt; index -1 )
+        sort(a, s, index -1)
+    if (index &amp;lt; e)
+        sort(a, index, e)
+
+
+}
+
+/**
+ * Находим &quot;средний&quot; элемент и сортируем относительно него
+ */
+def partition(a, s , e) {
+ int p = (s + e) / 2
+
+    def i = s;
+    def j = e;
+    def pivot = a[p];
+    println &quot;pivot=&quot; + pivot
+
+    while (i&amp;lt;=j) {
+        while (a[i] &amp;lt; pivot) {
+            i++;
+        }
+
+        while (a[j] &amp;gt; pivot) {
+            j--
+        }
+
+        println &quot;i=&quot; + i + &quot; j=&quot; + j
+
+        def tmp;
+        if (i&amp;lt;=j) {
+             tmp = a[i]
+             a[i] = a[j]
+             a[j] = tmp
+             println &quot;swap &quot; + a[i] + &quot; &quot; + a[j]  + &quot; i j &quot; + i + &quot;-&quot; + j
+             i++
+             j--
+        }
+
+        printArr(a);
+    }
+     println &quot;index=&quot; + i
+
+    return i
+}
+
+println &quot;Исходный массив:&quot;
+printArr(a);
+
+sort(a)
+println &quot;Отсортированный:&quot;
+printArr(a)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Команда nohup</title>
+      <link>http://jbake.org/blog/2015/nohup.html</link>
+      <pubDate>Tue, 14 Apr 2015 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2015/nohup.html</guid>
+      	<description>
+	&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_Использование_команды_nohup&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Использование_команды_nohup&quot;&gt;&lt;/a&gt;Использование команды nohup&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Команда nohup имеет следующий формат:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;    nohup command &amp;amp;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Предположим, вы хотите, чтобы команда grep осуществила поиск во всех файлах в вашем текущем каталоге строки &quot;word&quot; и перенаправила вывод в файл word.list, и затем, не ожидая завершения, вы хотите выйти из системы, то введите следующую строку:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;    nohup grep word * &amp;gt; word.list &amp;amp;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Вы можете завершить команду nohup с помощью команды kill.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Захвачен ли монитор потоком на данный объект</title>
+      <link>http://jbake.org/blog/2015/thread_hold_lock.html</link>
+      <pubDate>Tue, 14 Apr 2015 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2015/thread_hold_lock.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Я знаю 2 способа проверить держит ли поток монитор на объект.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;1) Можно вызвать у объекта методы &lt;code&gt;wait()&lt;/code&gt; или &lt;code&gt;notify()&lt;/code&gt;, которые выбросят исключение если вызваны не из синхронизированного блока. И собственно алгоритм такой - вызываем &lt;code&gt;newspaper.wait()&lt;/code&gt; и если этот метод бросает исключние, значит лока нет!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;2) Можно вызвать статический метод &lt;code&gt;holdsLock(Object obj)&lt;/code&gt;  класса Thread, который и вернет &lt;code&gt;true&lt;/code&gt; если поток владеет монитором этого объекта.&lt;/p&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Обзор книги &quot;Netty in Action&quot;</title>
+      <link>http://jbake.org/blog/2015/netty_in_action.html</link>
+      <pubDate>Thu, 22 Jan 2015 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2015/netty_in_action.html</guid>
+      	<description>
+	&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_Блокирующий_против_неблокирующего_ввода_вывода_в_jvm&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Блокирующий_против_неблокирующего_ввода_вывода_в_jvm&quot;&gt;&lt;/a&gt;Блокирующий против неблокирующего ввода-вывода в JVM&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Продолжающийся рост веба увеличивает потребность в обработке все большего количества данных через сеть и возможностей масштабирования. Эффективность приложений выходит на первое место и встречается со спросом на эту эффективность. К счастью, Java уже поставляется со всеми инструментами, необходимыми для создания эффективных и масштабируемых приложений. Хотя ранние версии Java поддерживали работу с сетью, в Java 1.4 был представлен NIO API, который упрощал разработку клиент-серверных приложений.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Новый ввод-вывод (NIO.2), представленный в Java 7, дает возможность писать асинхронный, работающий с сетью код и также предлагает более высокоуровневый API , чем его предшественник.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Для работы с сетью у вас есть всего два варианта:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Использовать IO, известный как блокирующий ввод-вывод&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Использовать NIO, известный как новый/неблокирующий ввод-вывод&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/blocking.png&quot; alt=&quot;blocking&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;title&quot;&gt;Figure 1. Блокирующие сокеты&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/nonblocking.png&quot; alt=&quot;nonblocking&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;title&quot;&gt;Figure 2. Неблокирующие сокеты&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;На рисунках 1,2 показано, что блокирующий ввод-вывод использует по выделенному потоку на на каждое соединение, это означает, что мы имеем связь один-к-одному между подключениями и потоками, которая ограничивает количество потоков, которое может создать JVM.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Запомнив это концептуальное отличие, попробуем написать простой сервер, используя разные подходы.
+Сервер будет принимать запросы от клиента, и отправлять их назад.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class PlainEchoServer {
+    public void serve(int port) throws IOException {
+        final ServerSocket socket = new ServerSocket(port); &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+        try {
+            while (true) {
+                final Socket clientSocket = socket.accept(); &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;
+                System.out.println(&quot;Accepted connection from &quot; +
+                        clientSocket);
+                new Thread(new Runnable() { &lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;(3)&lt;/b&gt;
+                    @Override
+                    public void run() {
+                        try {
+                            BufferedReader reader = new BufferedReader(
+                                    new
+                                            InputStreamReader(clientSocket.getInputStream()));
+                            PrintWriter writer = new PrintWriter(clientSocket
+                                    .getOutputStream(), true);
+                            while(true) { &lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;(4)&lt;/b&gt;
+                                writer.println(reader.readLine());
+                                writer.flush();
+
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            try {
+                                clientSocket.close();
+                            } catch (IOException ex) {
+                                // ignore on close
+                            }
+                        }
+                    }
+                }).start(); &lt;i class=&quot;conum&quot; data-value=&quot;5&quot;&gt;&lt;/i&gt;&lt;b&gt;(5)&lt;/b&gt;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new PlainEchoServer().serve(9000);
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;colist arabic&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Привязываем сервер к порту&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Блокируем основной поток, пока клиент не подключится&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Создаем новый поток и обрабатываем подключение клиента&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;4&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Читаем введенные клиентом данные и записываем их назад&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;5&quot;&gt;&lt;/i&gt;&lt;b&gt;5&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Запускаем поток&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Подключиться к такому серверу можно с помощью &lt;a href=&quot;https://ru.wikipedia.org/wiki/Telnet&quot;&gt;telnet&lt;/a&gt;, например вот так:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;telnet localhost 9000&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;На каждого нового клиента требуется создать отдельный поток. Можно, конечно, сделать какой-нибудь pool потоков, чтобы уменьшить затраты на создание каждый раз нового потока, и переиспользовать уже созданные, но это поможет лишь только на время. Основная проблема все же остается: количество одновременных клиентов будет ограничено количеством потоков, обрабатывающих их. Когда приложению необходимо обрабатывать одновременно тысячи клиентов, это становится большой проблемой.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Эта проблема исчезает, если мы будем использовать NIO, как например, в следующем примере. Но для начала важно узнать основные концепции в NIO.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Основные_концепции_nio&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Основные_концепции_nio&quot;&gt;&lt;/a&gt;Основные концепции NIO&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Java 7 представила новый NIO API, известный как NIO.2, но можно так же использовать и &quot;просто&quot; NIO. Хотя новый API также асинхронный, он отличается от исходной реализации NIO, как API, так и реализацией. Хотя API не сильно отличаются, они оба имеют одинаковые возможности. Например, обе реализации используют одну и ту же абстракцию под названием &lt;a href=&quot;http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html&quot;&gt;ByteBuffer&lt;/a&gt;, как обертку для данных.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;_bytebuffer&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_bytebuffer&quot;&gt;&lt;/a&gt;Bytebuffer&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;ByteBuffer - это основа для обоих NIO APIs, так же как и в Netty. ByteBuffer может быть создан как и в Java куче &lt;em&gt;(heap)&lt;/em&gt;, так и напрямую, что означает, что он будет хранится вне кучи. Использование буфера напрямую обычно быстрее, когда мы передаем его какому-то каналу &lt;em&gt;(channel)&lt;/em&gt;, но стоимость создание и очистки/удаления такого буфера выше. В обоих случаях, API Bytebuffer&amp;#8217;а один и тот же, который позволяет одним унифицированный образом управлять данными  в буфере. ByteBuffer позволяет одним и тем же данным быть легко доступными между разными экземплярами Bytebuffer, без необходимости копировать внутренние данные. Так же он предоставляет другие операции, который ограничивают видимость внутренних данных.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Slicing ByteBuffer&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sidebarblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Разрезание &lt;em&gt;(Slicing)&lt;/em&gt; ByteBuffer позволяет создать новый экземпляр, который будет ссылаться на те же данные, как и исходный ByteBuffer, но делать доступным только часть этих данных. Это полезно для минимизации количества копирований данных, но разрешает доступ только к части этих данных.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Типичное использование ByteBuffer включает следущее:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Записать данные в ByteBuffer&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Вызвать &lt;a href=&quot;http://docs.oracle.com/javase/7/docs/api/java/nio/Buffer.html#flip()&quot;&gt;ByteBuffer.flip()&lt;/a&gt; для смены режима на чтение&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Чтение данных из ByteBuffer&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Вызов либо &lt;a href=&quot;http://docs.oracle.com/javase/7/docs/api/java/nio/Buffer.html#clear()&quot;&gt;ByteBuffer.clear()&lt;/a&gt;, либо &lt;a href=&quot;http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html#compact()&quot;&gt;ByteBuffer.compact()&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Когда данные пишутся в ByteBuffer, он следит за количеством данных, записанных в него, сохраняя позицию индекса записи. Перед тем, как прочитать данные нужно вызвать Bytebuffer.flip(), чтобы сменить режим с записи на режим чтения. Вызов метода ByteBuffer.flip() устанавливает ограничение в ByteBuffer в текущую позицию, а затем устанавливает ее в 0. Таким образом можно считать все данные из ByteBuffer.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Чтобы опять записать данные в ByteBuffer, нужно вернуться в режим чтения, а затем вызвать следующие методы:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://docs.oracle.com/javase/7/docs/api/java/nio/Buffer.html#clear()&quot;&gt;ByteBuffer.clear()&lt;/a&gt; Очищает все данные в буфере&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html#compact()&quot;&gt;ByteBuffer.compact()&lt;/a&gt; Очищает только те данные, которые были прочтены, и перемещает все непрочитанные данные в начало и сдвигает позицию, типичное использование:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;Channel inChannel = ....;
+ByteBuffer buf = ByteBuffer.allocate(48);
+int bytesRead = -1;
+do {
+  bytesRead = inChannel.read(buf); &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+  if (bytesRead != -1) {
+   buf.flip(); &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;
+    while(buf.hasRemaining()){
+     System.out.print((char) buf.get()); &lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;(3)&lt;/b&gt;
+    }
+   buf.clear(); &lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;(4)&lt;/b&gt;
+  }
+} while (bytesRead != -1);
+inChannel.close();&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;colist arabic&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Прочитать данные из канала &lt;em&gt;(Channel)&lt;/em&gt;  в ByteBuffer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Подготовим буфер для чтения&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Прочитаем байты из ByteBuffer,с каждым вызовом get() обновляем индекс позиции на 1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;4&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Подготовим буфер для записи&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Теперь, когда понятно, как работать с ByteBuffer, рассмотрим концепцию селекторов &lt;em&gt;(Selectors)&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Работа_с_nio_селекторами_em_selectors_em&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Работа_с_nio_селекторами_em_selectors_em&quot;&gt;&lt;/a&gt;Работа с NIO селекторами &lt;em&gt;(Selectors)&lt;/em&gt;&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;NIO API использует основанный на селекторах подход для обработки сетевых событий и данных. Канал &lt;em&gt;(channel)&lt;/em&gt; выступает в роли соединения между сущностями, способными осуществлять операции ввода-вывода над такими сущностями как как файл или сокет. Селектор это NIO компонент, который определяет готов ли канал или несколько каналов для чтения/записи, получается что один селектор способен обработать множество подключений, сводящий на нет необходимость для использования модели поток-на-соединение, как было блокирующем сервере из первого примера.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Чтобы использовать селектор нужно выполнит следующие шаги:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Создать один или несколько селекторов, в которых можно зарегистрировать каналы &lt;em&gt;(channels)&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Когда каналы зарегистрированы, нужно указать события,к которые будут прослушиваться. Существует 4 типа событий:&lt;/p&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;OP_ACCEPT&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;OP_CONNECT&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;OP_READ&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;OP_WRITE&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Когда каналы зарегистрированы, необходимо вызвать метод Selector.select(), который заблокирует основной поток, пока какое-нибудь из событий не произойдет.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Когда метод разблокируется, можно получить все экземпляры SelectionKey(содержит ссылки на зарегистрированный канал и тип события) и выполнить свой код. Что конкретно выполнять зависит от типа события, которое пришло. SelectedKey может содержать больше чем одно событие в один промежуток времени.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Чтобы увидеть как это работает на деле, нужно реализовать неблокирующую версию сервера из предыдущего примера.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.util.Iterator;
+import java.util.Set;
+
+public class PlainNioEchoServer {
+    public void serve(int port) throws IOException {
+        System.out.println(&quot;Listening for connections on port &quot; + port);
+        ServerSocketChannel serverChannel = ServerSocketChannel.open();
+        ServerSocket ss = serverChannel.socket();
+        InetSocketAddress address = new InetSocketAddress(port);
+        ss.bind(address); &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+        serverChannel.configureBlocking(false);
+        Selector selector = Selector.open();
+        serverChannel.register(selector, SelectionKey.OP_ACCEPT); &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;
+        while (true) {
+            try {
+                selector.select(); &lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;(3)&lt;/b&gt;
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                // handle in a proper way
+                break;
+            }
+            Set readyKeys = selector.selectedKeys();&lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;(4)&lt;/b&gt;
+            Iterator iterator = readyKeys.iterator();
+            while (iterator.hasNext()) {
+                SelectionKey key = (SelectionKey) iterator.next();
+                iterator.remove();//; &lt;i class=&quot;conum&quot; data-value=&quot;5&quot;&gt;&lt;/i&gt;&lt;b&gt;(5)&lt;/b&gt;
+                try {
+                    if (key.isAcceptable()) {
+                        ServerSocketChannel server = (ServerSocketChannel)
+                                key.channel();
+                        SocketChannel client = server.accept();&lt;i class=&quot;conum&quot; data-value=&quot;6&quot;&gt;&lt;/i&gt;&lt;b&gt;(6)&lt;/b&gt;
+                        System.out.println(&quot;Accepted connection from &quot; +
+                                client);
+                        client.configureBlocking(false);
+                        client.register(selector, SelectionKey.OP_WRITE | SelectionKey.OP_READ, ByteBuffer.allocate(100));&lt;i class=&quot;conum&quot; data-value=&quot;7&quot;&gt;&lt;/i&gt;&lt;b&gt;(7)&lt;/b&gt;
+                    }
+                    if (key.isReadable()) {&lt;i class=&quot;conum&quot; data-value=&quot;8&quot;&gt;&lt;/i&gt;&lt;b&gt;(8)&lt;/b&gt;
+                        SocketChannel client = (SocketChannel) key.channel();
+                        ByteBuffer output = (ByteBuffer) key.attachment();
+                        client.read(output);&lt;i class=&quot;conum&quot; data-value=&quot;9&quot;&gt;&lt;/i&gt;&lt;b&gt;(9)&lt;/b&gt;
+                    }
+                    if (key.isWritable()) {&lt;i class=&quot;conum&quot; data-value=&quot;10&quot;&gt;&lt;/i&gt;&lt;b&gt;(10)&lt;/b&gt;
+                        SocketChannel client = (SocketChannel) key.channel();
+                        ByteBuffer output = (ByteBuffer) key.attachment();
+                        output.flip();
+                        client.write(output);&lt;i class=&quot;conum&quot; data-value=&quot;11&quot;&gt;&lt;/i&gt;&lt;b&gt;(11)&lt;/b&gt;
+                        output.compact();
+                    }
+                } catch (IOException ex) {
+                    key.cancel();
+                    try {
+                        key.channel().close();
+                    } catch (IOException cex) {
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new PlainNioEchoServer().serve(9091);
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;colist arabic&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Привязываем сервер к порту&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Регистрируем канал с селектором для прослушивания событий типа &quot;accept&quot;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Блокируем пока какой-то селектор не сработает&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;4&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Получаем все экземпляры SelectedKey&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;5&quot;&gt;&lt;/i&gt;&lt;b&gt;5&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Убираем SelectedKey из итератора&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;6&quot;&gt;&lt;/i&gt;&lt;b&gt;6&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Принимаем соединение клиента&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;7&quot;&gt;&lt;/i&gt;&lt;b&gt;7&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Регистрируем соединение в селекторе и устанавливаем ByteBuffer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;8&quot;&gt;&lt;/i&gt;&lt;b&gt;8&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Проверяем SelectedKey на чтение&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;9&quot;&gt;&lt;/i&gt;&lt;b&gt;9&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Читаем данные в ByteBuffer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;10&quot;&gt;&lt;/i&gt;&lt;b&gt;10&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Проверяем SelectedKey на запись&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;11&quot;&gt;&lt;/i&gt;&lt;b&gt;11&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Записываем данные их ByteBuffer в канал&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Этот пример гораздо сложнее, чем предыдущая версия. Такая сложность - это своего рода компромисс. Асинхронный код обычно сложнее, чем его синхронная версия. Семантически, исходный NIO и NIO.2 API одинаковые, но на самом деле их реализация разная. Далее мы разработаем 3 версию нашего сервера.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_echoserver_основанный_на_nio_2&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_echoserver_основанный_на_nio_2&quot;&gt;&lt;/a&gt;EchoServer, основанный на NIO.2&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;В отличие от первой реализации NIO, NIO.2 позволяет отлавливать конкретные операции ввода-вывода и завершить их специальным классом-обработчиком &lt;em&gt;(CompletionHandler)&lt;/em&gt;. Это класс должен выполняется после завершения какой-либо операции. Таким образом он запускается внутренним механизмом NIO и реализация скрыта от разработчика. Так же гарантируется,что только один обработчик будет выполняться для одного канала в один промежуток времени. Этот подход позволяет упростить код, потому что убирается вся сложность работы с многопоточным кодом.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Основное различие между NIO и NIO.2 это то, что не требуется самому проверять - произошло ли какое-то событие и вызывать необходимый обработчик. В NIO.2 нужно только запустить IO &lt;em&gt;(input-output)&lt;/em&gt; операцию и зарегистрировать обработчик &lt;em&gt;(CompletionHandler)&lt;/em&gt;, который будет получать уведомления, когда операция завершится. Поэтому необходимость писать свою собственную логику на проверку завершения операция отпадает. Сейчас, давайте посмотрим как будет выглядеть асинхронный &lt;em&gt;EchoServer&lt;/em&gt; , реализованный с помощью NIO.2 API.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.AsynchronousServerSocketChannel;
+import java.nio.channels.AsynchronousSocketChannel;
+import java.nio.channels.CompletionHandler;
+import java.util.concurrent.CountDownLatch;
+
+public class PlainNio2EchoServer {
+
+
+    public void serve(int port) throws IOException {
+        System.out.println(&quot;Listening for connections on port &quot; + port);
+        final AsynchronousServerSocketChannel serverChannel =
+                AsynchronousServerSocketChannel.open();
+        InetSocketAddress address = new InetSocketAddress(port);
+        serverChannel.bind(address); &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+        final CountDownLatch latch = new CountDownLatch(1);
+        serverChannel.accept(null, new
+                CompletionHandler&amp;lt;AsynchronousSocketChannel, Object&amp;gt;() {
+                    &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;
+
+                    @Override
+                    public void completed(final AsynchronousSocketChannel channel,
+                                          Object attachment) {
+                        serverChannel.accept(null, this);&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;(3)&lt;/b&gt;
+                        ByteBuffer buffer = ByteBuffer.allocate(100);
+                        channel.read(buffer, buffer,
+                                new EchoCompletionHandler(channel));&lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;(4)&lt;/b&gt;
+                    }
+
+                    @Override
+                    public void failed(Throwable throwable, Object attachment) {
+                        try {
+                            serverChannel.close();&lt;i class=&quot;conum&quot; data-value=&quot;5&quot;&gt;&lt;/i&gt;&lt;b&gt;(5)&lt;/b&gt;
+                        } catch (IOException e) {
+                            // ingnore on close
+                        } finally {
+                            latch.countDown();
+                        }
+                    }
+                });
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private final class EchoCompletionHandler implements
+            CompletionHandler&amp;lt;Integer, ByteBuffer&amp;gt; {
+        private final AsynchronousSocketChannel channel;
+
+        EchoCompletionHandler(AsynchronousSocketChannel channel) {
+            this.channel = channel;
+        }
+
+        @Override
+        public void completed(Integer result, ByteBuffer buffer) {
+            buffer.flip();
+            channel.write(buffer, buffer, new CompletionHandler&amp;lt;Integer,
+                    ByteBuffer&amp;gt;() {
+                &lt;i class=&quot;conum&quot; data-value=&quot;6&quot;&gt;&lt;/i&gt;&lt;b&gt;(6)&lt;/b&gt;
+
+                @Override
+                public void completed(Integer result, ByteBuffer buffer) {
+                    if (buffer.hasRemaining()) {
+                        channel.write(buffer, buffer, this);&lt;i class=&quot;conum&quot; data-value=&quot;7&quot;&gt;&lt;/i&gt;&lt;b&gt;(7)&lt;/b&gt;
+                    } else {
+                        buffer.compact();
+                        channel.read(buffer, buffer,
+                                EchoCompletionHandler.this);&lt;i class=&quot;conum&quot; data-value=&quot;8&quot;&gt;&lt;/i&gt;&lt;b&gt;(8)&lt;/b&gt;
+                    }
+                }
+
+                @Override
+                public void failed(Throwable exc, ByteBuffer attachment) {
+                    try {
+                        channel.close();
+                    } catch (IOException e) {
+                        // ingnore on close
+                    }
+                }
+            });
+        }
+
+        @Override
+        public void failed(Throwable exc, ByteBuffer attachment) {
+            try {
+                channel.close();
+            } catch (IOException e) {
+                // ingnore on close
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new PlainNio2EchoServer().serve(9092);
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;colist arabic&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Привяжем сервер к порту&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Начинаем принимать новые подключения. Как только соединение установлено - CompletionHandler будет вызван&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Опять принимаем новый соединения&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;4&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Запускаем операцию чтения из channel, CompletionHandler будет уведомлен, когда что-нибудь будет прочитано&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;5&quot;&gt;&lt;/i&gt;&lt;b&gt;5&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Закрываем socket если произошла ошибка&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;6&quot;&gt;&lt;/i&gt;&lt;b&gt;6&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Запускаем операцию записи в channel, CompletionHandler будет уведомлен, когда что-нибудь будет записано&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;7&quot;&gt;&lt;/i&gt;&lt;b&gt;7&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Запускаем еще раз операцию чтения, если что-то осталось в ByteBuffer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;8&quot;&gt;&lt;/i&gt;&lt;b&gt;8&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Запускаем операцию чтения в channel, CompletionHandler будет уведомлен, когда что-нибудь будет прочитано&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;На первый взгляд может показаться, что в NIO.2 гораздо больше кода, чем в предыдущем примере с NIO. Но можно обратить внимание, что NIO.2 берет обработку многопоточности на себя и также создание так называемого цикла событий &lt;em&gt;(event loop)&lt;/em&gt; . Этот подход упрощает разработку многопоточного приложения на NIO, даже если на первый взгляд код кажется сложным. Так как сложность приложений увеличивается, пропасть между этими подходами становится более очевидной, потому что во второй версии получается более читаемый код. Далее мы посмотрим на проблемы, который существуют в обоих реализациях NIO.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_Проблемы_с_nio_и_как_netty_решает_эти_проблемы&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Проблемы_с_nio_и_как_netty_решает_эти_проблемы&quot;&gt;&lt;/a&gt;Проблемы с NIO и как Netty решает эти проблемы&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Далее будут рассмотрены некоторые проблемы и ограничения реализации в Java NIO API, и как Netty решает эти проблемы. Если вы уже используете классы из пакета NIO - это шаг в правильном направлении, но пользователи весьма ограничены в способах его использования. Проблемы, с которыми вы столкнетесь, являются результатом дизайна, который был сделан в прошлом, и который сейчас не так то легко поменять.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Проблемы_кроссплатформенности_и_совместимости&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Проблемы_кроссплатформенности_и_совместимости&quot;&gt;&lt;/a&gt;Проблемы кроссплатформенности и совместимости&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;NIO фреймворк довольно низкоуровневый и сильно зависит от того, как сама операционная система обрабатывает операции ввода-вывода. Поэтому выполнить требование унифицированного API в Java, который должен вести себя одинаково на всех платформах, не очень простая задача.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Когда используешь NIO часто можно заметить, что код хорошо работает под Linux, например, в отличие от Windows. Это утверждение справедливо, кстати, не только для NIO.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;admonitionblock tip&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td class=&quot;icon&quot;&gt;
+&lt;i class=&quot;fa icon-tip&quot; title=&quot;Tip&quot;&gt;&lt;/i&gt;
+&lt;/td&gt;
+&lt;td class=&quot;content&quot;&gt;
+Даже если вы не используете NIO, очень важно тестировать ваше приложение на всех операционных системах, которые хотите поддерживать. Если все ваши тесты успешно выполняются на рабочей станции с Linux, удостоверьтесь, что они так же себя ведут и на других ОС. Если не проверили - приготовьтесь к неожиданностям.
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Может показаться, что NIO.2 поддерживается только в Java 7, и если ваше приложение работает на Java 6, то вы не сможете его использовать. Так же пока еще нет поддержки в NIO.2 каналов, работающих с датаграмами &lt;em&gt;(datagram channels)&lt;/em&gt; (для приложений использующих UDP), поэтому использование NIO.2 ограничивается только TCP протоколом. Netty успешно скрывает эту проблему, и предоставляет общий API, который работает одинаково и на Java 6 и на Java 7. Не придется беспокоиться о версии Java, Netty API будет работать одинаково хорошо и предоставлять простой и удобный интерфейс.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Использовать_bytebuffer_или_нет&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Использовать_bytebuffer_или_нет&quot;&gt;&lt;/a&gt;Использовать ByteBuffer &amp;#8230;&amp;#8203; или нет&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Как вы видели ранее, ByteBuffer используется, как контейнер данных. К сожалению, JDK не имеет реализации контейнера ByteBuffer, которая бы позволяла обернуть массив экземпляров ByteBuffer. Эта функциональность бы очень пригодилась для минимизации количества копирований данных. Если вы вдруг решили реализовать эту структуру самостоятельно, не теряйте зря время, ByteBuffer имеет приватный конструктор, и поэтому невозможно от него наследоваться.
+Netty предоставляет свою реализацию ByteBuffer, которая обходит эти ограничения и предоставляет несколько вариантов конструкторов, методов для ByteBuffer в своем простом API.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Рассеивание_данных_и_сбор_em_scattering_and_gathering_may_leak_em&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Рассеивание_данных_и_сбор_em_scattering_and_gathering_may_leak_em&quot;&gt;&lt;/a&gt;Рассеивание данных и сбор &lt;em&gt;(Scattering and gathering may leak)&lt;/em&gt;&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Многие реализации каналов &lt;em&gt;(channel)&lt;/em&gt; поддерживают рассеивание данных и сбор &lt;em&gt;(scattering and gathering)&lt;/em&gt;. Этото функционал позволяет читать и писать из нескольких экземпляров ByteBuffer одновременно, при этом с большей производительностью. Таким способом устроено ядро операционной системы, которое дает большую производительность на чтение/запись, потому что ядро ОС гораздо ближе к &quot;железу&quot;, и знает как обрабатывать данные наиболее эффективным способом.
+Рассеивание/сбор часто используется для разделения разных экземпляров ByteBuffer для того, чтобы обрабатывать каждый экземпляр отдельно. Например, если мы захотим, чтобы заголовок находился в одном ByteBuffer, а тело с данными в другом.
+На рисунке показано как осуществляется рассеивающееся чтение. Мы передаем массив экземпляров ByteBuffer в ScatteringByteChannel и данные &quot;рассеиваются&quot; с одного канала &lt;em&gt;(channel)&lt;/em&gt; к разным буферам.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/gathering.png&quot; alt=&quot;gathering&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;title&quot;&gt;Figure 3. Рассеивание&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Сбор &lt;em&gt;(Gathering)&lt;/em&gt; работает похожим образом, но данные наоборот - записываются в канал &lt;em&gt;(channel)&lt;/em&gt;. Вы передаете массив экземпляров ByteBuffer в метод GatheringByteChannel.write() и данные собираются из буферов в канал &lt;em&gt;(channel)&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/gathering1.png&quot; alt=&quot;gathering1&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;title&quot;&gt;Figure 4. Сбор&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;К сожалению, эта функциональность была сломана до одной из последних обновлений Java 6 и Java 7, использование ее приводило к утечке памяти и OutOfMemoryError. Нужно быть осторожным, когда используешь рассеивание/сбор &lt;em&gt;(scattering/gathering)&lt;/em&gt; , и удостовериться что используется необходимая версия Java.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Подавление_известного_бага_с_событием_epoll_em_squashing_the_famous_epoll_bug_em&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Подавление_известного_бага_с_событием_epoll_em_squashing_the_famous_epoll_bug_em&quot;&gt;&lt;/a&gt;Подавление известного бага с событием epoll &lt;em&gt;(Squashing the famous epoll bug)&lt;/em&gt;&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;На Linux-подобных операционных системах селектор &lt;em&gt;(selector)&lt;/em&gt; использует уведомления &lt;a href=&quot;:https://ru.wikipedia.org/wiki/Epoll&quot;&gt;epoll&lt;/a&gt; об IO событиях над объектом. Этот высоко-производительный способ позволят ОС работать асинхронно с сетевым стэком. К сожалению, известный баг с epoll может привести к неправильному состоянию селектора, что приводит к 100% загрузке CPU и бесконечному ожиданию &lt;em&gt;(spinning)&lt;/em&gt;. Единственный способ восстановить состояние - это пересоздать &lt;em&gt;(recycle)&lt;/em&gt; старый селектор и переместить зарегистрированный экземпляр канала в только что созданный селектор.
+Что же произойдет если метод Selector.select() перестанет блокировать и сразу же вернет результат, даже если ни одного SelectionKeys не будет существовать. Это противоречит тому, что написано в javadoc - &lt;a href=&quot;:http://docs.oracle.com/javase/7/docs/api/java/nio/channels/Selector.html#select()&quot;&gt;Selector.select() must not unblock if nothing is selected&lt;/a&gt;.
+Список проблем с epoll ограничен, и Netty пытается автоматически обнаруживать их и предотвращать. Следующий код демонстрирует баг с epoll:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;...
+ while (true) {
+     int selected = selector.select(); &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+     Set&amp;lt;SelectedKeys&amp;gt; readyKeys = selector.selectedKeys();
+     Iterator iterator = readyKeys.iterator(); &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;
+     while (iterator.hasNext()) { &lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;(3)&lt;/b&gt;
+     ...
+     ... &lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;(4)&lt;/b&gt;
+ }
+}
+...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;colist arabic&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Не блокирует и возвращает 0, если ничего не было выбрано&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Получает все SelectedKeys, Iterator будет пуст и ничего выбрано не будет&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Проходит во всем SelectedKeys из Iterator, но в этот блок кода никогда не зайдет, потому что ничего небудет выбрано&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;4&lt;/b&gt;&lt;/td&gt;
+&lt;td&gt;Дальнейшая работа&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;В итоге получается что небольшой кусок кода съедает весь CPU.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;...
+ while (true) {
+    ...
+    }
+...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Значение никогда не будет false, и код зависнет в бесконечном цикле  и постепенно выест весь CPU, тем самым вытесняя остальные процессы.
+Это лишь несколько возможных проблеем, с которому можно столкнуться при использовании неблокирующего ввода-вывода. К сожалению, даже после многих лет разработки в этой области некоторые проблемы еще не решены, и Netty успешно
+абстрагирует разработчиков от этих проблем.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Обзор книги &quot;Learning OpenShift&quot; </title>
+      <link>http://jbake.org/blog/2015/learning_openshift.html</link>
+      <pubDate>Mon, 12 Jan 2015 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2015/learning_openshift.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;С годами &lt;a href=&quot;https://www.openshift.com/&quot;&gt;Openshift&lt;/a&gt; заматерел, обзавелся поддержкой большого количества фрэймворков и технологий. Мне естественно нравятся java штуки, который предоставляет openshift - всякие apache tomcat, jboss eap и моя любимая mongodb. Полный список технологий можно поcмотреть тут &lt;a href=&quot;https://marketplace.openshift.com/home&quot; class=&quot;bare&quot;&gt;https://marketplace.openshift.com/home&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Когда мне предложили написать ревью на книгу &lt;a href=&quot;https://www.packtpub.com/virtualization-and-cloud/learning-openshift&quot;&gt;Learning Openshift&lt;/a&gt; я сразу согласился, потому что меня разрывало любопытство, что может быть я пропутил что-то очень важное об openshift и непременно нужно это узнать.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Так как я считаю себя весьма опытным пользователем &lt;a href=&quot;https://www.openshift.com/&quot;&gt;openshift&lt;/a&gt;, бронзовый план все-таки. То я бегло пробежал первые главы, потому что все эти шаги по настройки я много раз проворачивал на разных своих домашних машинах и знал почти наизусть. Мое внимание привлекла глава 6, в которой показывался пример быстрой разработки java-приложения с использованием spring, mongodb. Пример как быстро написать такое приложение я и хотел бы здесь привести. Материалы взяты из книги.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Для нетерпеливых &lt;a href=&quot;http://mlbparks-onpaas.rhcloud.com/&quot; class=&quot;bare&quot;&gt;http://mlbparks-onpaas.rhcloud.com/&lt;/a&gt; вот пример того, какое приложение получится в итоге. Если сайт сразу не загрузится - обновите несколько раз, такое бывает.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Ну и конечно и самое кратчайшее руководство, как сделать аналогичное приложение и картинка чтобы заинтересовать.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/learning_openshift_1.jpg&quot; alt=&quot;learning openshift 1&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;$ rhc app create springmlb tomcat7 mongodb-2.4 --from-code https://github.com/gshipley/springmlb.git&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Это для тех кто уже зарегистрировался в openshift и установил &lt;code&gt;rhc&lt;/code&gt;, для остальных прошу следовать сюда &lt;a href=&quot;https://developers.openshift.com/en/overview-what-is-openshift.html&quot; class=&quot;bare&quot;&gt;https://developers.openshift.com/en/overview-what-is-openshift.html&lt;/a&gt;. Это не сложно.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;После выполненой команды подключимся к нашему приложении с помощью &lt;code&gt;ssh&lt;/code&gt; для этого в консоли нужно выполнить команду&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;$ rhc app ssh springmlb&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://developers.openshift.com/en/managing-remote-connection.html&quot;&gt;Документация по ключам ssh&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;После того как мы подключились к нашей машине загрузим json файл с данными и сохраним в папке &lt;code&gt;/tmp&lt;/code&gt; на удаленной машине. Для этого выполним команду:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;$ cd /tmp
+$ wget https://raw.github.com/gshipley/springmlb/master/mlbparks.json&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Импортнем все в монгу&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;$ mongoimport --jsonArray -d $OPENSHIFT_APP_NAME -c teams --type json --file /tmp/mlbparks.json  -h $OPENSHIFT_MONGODB_DB_HOST --port $OPENSHIFT_MONGODB_DB_PORT -u $OPENSHIFT_MONGODB_DB_USERNAME  -p $OPENSHIFT_MONGODB_DB_PASSWORD&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Потом можно проверить, зайдя по соответствующему &lt;code&gt;url&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/learning_openshift_2.jpg&quot; alt=&quot;learning openshift 2&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Вот собственно и все! Более подробную информацию можно увидеть в книге &lt;a href=&quot;https://www.packtpub.com/virtualization-and-cloud/learning-openshift&quot; class=&quot;bare&quot;&gt;https://www.packtpub.com/virtualization-and-cloud/learning-openshift&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Так же очень хороший пример разработки похожего приложения находится тут &lt;a href=&quot;https://blog.openshift.com/day-22-developing-single-page-applications-with-spring-mongodb-and-angularjs/&quot;&gt;developing-single-page-applications-with-spring-mongodb-and-angularjs&lt;/a&gt;
+Это блог разработчика &lt;a href=&quot;https://github.com/shekhargulati&quot;&gt;Shekhar Gulati&lt;/a&gt;, у него есть очень интересный &lt;a href=&quot;https://blog.openshift.com/learning-30-technologies-in-30-days-a-developer-challenge/&quot;&gt;цикл статей&lt;/a&gt;, в котором он в течении 30 дней разрабатывает по одному приложению в день с используя openshift&lt;/p&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Получение метаданых о фотографии</title>
+      <link>http://jbake.org/blog/2014/metaextractor.html</link>
+      <pubDate>Thu, 18 Dec 2014 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2014/metaextractor.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Все это в java можно вытащить с помощью удобной библиотеки &lt;a href=&quot;https://github.com/drewnoakes/metadata-extractor&quot;&gt;metadata-extractor&lt;/a&gt;. Она умеет понимать следущие форматы:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Exchangeable_image_file_format&quot;&gt;Exif&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/IPTC&quot;&gt;IPTC&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Extensible_Metadata_Platform&quot;&gt;XMP&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/JPEG_File_Interchange_Format&quot;&gt;JFIF / JFXX&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/ICC_profile&quot;&gt;ICC&lt;/a&gt; Profiles&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Photoshop&quot;&gt;Photoshop&lt;/a&gt; fields&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Portable_Network_Graphics&quot;&gt;PNG&lt;/a&gt; properties&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/BMP_file_format&quot;&gt;BMP&lt;/a&gt; properties&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Graphics_Interchange_Format&quot;&gt;GIF&lt;/a&gt; properties&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Например вот &lt;a href=&quot;http://en.wikipedia.org/wiki/Exchangeable_image_file_format&quot;&gt;Exif&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/Exif.jpg&quot; alt=&quot;Exif&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;А вот краткий пример на &lt;code&gt;groovy&lt;/code&gt;, который позволяет получить достаточно много информации&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-groovy&quot; data-lang=&quot;groovy&quot;&gt;@Grapes(
+@Grab(group=&apos;com.drewnoakes&apos;, module=&apos;metadata-extractor&apos;, version=&apos;2.7.0&apos;)
+)
+
+import com.drew.metadata.*;
+import com.drew.metadata.exif.*;
+import com.drew.imaging.ImageMetadataReader;
+
+
+File jpegFile = new File(&quot;C:\\Users\\Public\\Pictures\\Sample Pictures\\Koala.jpg&quot;);
+Metadata metadata = ImageMetadataReader.readMetadata(jpegFile);
+
+for (Directory directory : metadata.getDirectories()) {
+    for (Tag tag : directory.getTags()) {
+        System.out.println(tag);
+    }
+}
+
+// obtain the Exif directory
+ExifSubIFDDirectory directory = metadata.getDirectory(ExifSubIFDDirectory.class);
+
+// query the tag&apos;s value
+Date date = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
+
+println ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL + &quot;=&quot; + date&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;[JPEG] Compression Type - Baseline
+[JPEG] Data Precision - 8 bits
+[JPEG] Image Height - 768 pixels
+[JPEG] Image Width - 1024 pixels
+[JPEG] Number of Components - 3
+[JPEG] Component 1 - Y component: Quantization table 0, Sampling factors 1 horiz/1 vert
+[JPEG] Component 2 - Cb component: Quantization table 1, Sampling factors 1 horiz/1 vert
+[JPEG] Component 3 - Cr component: Quantization table 1, Sampling factors 1 horiz/1 vert
+[JFIF] Version - 1.2
+[JFIF] Resolution Units - inch
+[JFIF] X Resolution - 96 dots
+[JFIF] Y Resolution - 96 dots
+[Exif IFD0] Date/Time - 2009:03:12 13:48:28
+[Exif IFD0] Artist - Corbis
+[Exif IFD0] Unknown tag (0x4746) - 4
+[Exif IFD0] Unknown tag (0x4749) - 63
+[Exif IFD0] Windows XP Author - ?? ????
+[Exif IFD0] Unknown tag (0xea1c) - [2036 bytes]
+[Exif SubIFD] Date/Time Original - 2008:02:11 11:32:43
+[Exif SubIFD] Date/Time Digitized - 2008:02:11 11:32:43
+[Exif SubIFD] Sub-Sec Time Original - 17
+[Exif SubIFD] Sub-Sec Time Digitized - 17
+[Exif SubIFD] Unknown tag (0xea1c) - [1972 bytes]
+[Exif Thumbnail] Thumbnail Compression - JPEG (old-style)
+[Exif Thumbnail] X Resolution - 72 dots per unit
+[Exif Thumbnail] Y Resolution - 72 dots per unit
+[Exif Thumbnail] Thumbnail Offset - 313 bytes
+[Exif Thumbnail] Thumbnail Length - 4834 bytes
+[Xmp] Rating - 4.0
+[Adobe JPEG] DCT Encode Version - 1
+[Adobe JPEG] Flags 0 - 0
+[Adobe JPEG] Flags 1 - 0
+[Adobe JPEG] Color Transform - YCbCr
+36867=Mon Feb 11 11:32:43 FET 2008&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Красивишная печать дерева в консоль TreeNode</title>
+      <link>http://jbake.org/blog/2014/print-tree.html</link>
+      <pubDate>Tue, 2 Dec 2014 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2014/print-tree.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Печатает дерево в консоли, с помощью System.out&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt; public void print(TreeNode root) {
+        print(root, &quot;&quot;, true);
+    }
+
+ private void print(TreeNode root, String prefix, boolean isTail) {
+        System.out.println(prefix + (isTail ? &quot;└── &quot; : &quot;├── &quot;) + root.toString());
+        List&amp;lt;TreeNode&amp;gt; children = Collections.list(root.children());
+        for (int i = 0; i &amp;lt; children.size() - 1; i++) {
+            print(children.get(i), prefix + (isTail ? &quot;    &quot; : &quot;│   &quot;), false);
+        }
+        if (children.size() &amp;gt; 0) {
+            print(children.get(children.size() - 1), prefix + (isTail ? &quot;    &quot; : &quot;│   &quot;), true);
+        }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Вывод:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;└── rootFakeNode
+    └── lock0
+        ├── branchName0
+        └── lock1
+            ├── branchName0
+            └── lock0
+                └── branchName0&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Вау, красотища!!!&lt;/p&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Изменить размер фотографий с помощью groovy и imgscalr</title>
+      <link>http://jbake.org/blog/2014/image-resize-groovy.html</link>
+      <pubDate>Mon, 10 Nov 2014 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2014/image-resize-groovy.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Полезные штуки если вы зашли сюда случайно.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://groovy.codehaus.org/Download&quot;&gt;Скачать Groovy&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://groovyconsole.appspot.com&quot;&gt;Веб-консоль, чтобы потренироваться и понять что такое groovy&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Сразу к делу, вот итоговый скрипт:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-groovy&quot; data-lang=&quot;groovy&quot;&gt;@Grapes(
+        @Grab(group=&apos;org.imgscalr&apos;, module=&apos;imgscalr-lib&apos;, version=&apos;4.2&apos;) &lt;b class=&quot;conum&quot;&gt;(1)&lt;/b&gt;
+)
+import static org.imgscalr.Scalr.*;
+import org.imgscalr.Scalr;
+import javax.imageio.ImageIO;
+import javax.imageio.IIOException;
+import java.awt.image.BufferedImage;
+
+def srcFolder = &quot;src&quot;; &lt;b class=&quot;conum&quot;&gt;(2)&lt;/b&gt;
+def destFolder = srcFolder + &quot;/result/&quot;; &lt;b class=&quot;conum&quot;&gt;(3)&lt;/b&gt;
+
+BufferedImage img = null;
+def amount = 0
+new File(srcFolder).eachFile() {
+    f -&amp;gt;
+
+        try {
+            img = ImageIO.read(f);
+        }
+        catch (IOException e) {
+            println &quot;IOException &quot; + f.getName()
+            return;
+        }
+        catch (IIOException ei) {
+            println &quot;IIOException&quot;
+            return;
+        }
+
+        if (img == null) return;
+
+        BufferedImage thumbnail = Scalr.resize(img, 1000);
+
+        File outputfile = new File(destFolder + f.getName());
+
+        ImageIO.write(thumbnail, &quot;jpg&quot;, outputfile);
+
+        println &quot;Path &quot; + outputfile.toURL();
+
+        amount++;
+
+}
+
+println amount + &quot; images resized&quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;colist arabic&quot;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Менеджер зависимостей &lt;a href=&quot;http://groovy.codehaus.org/Grape&quot;&gt;Grape&lt;/a&gt;, по типу maven, gradle. Динамически подгружает необходимые библиотеки для скрипта.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Из какой папки берем фотки&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;В какую складываем&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Класс - обёртка</title>
+      <link>http://jbake.org/blog/2014/wrap-class.html</link>
+      <pubDate>Wed, 5 Nov 2014 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2014/wrap-class.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Давайте опять вернемся к нашему классу &lt;code&gt;Employee&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;class Employee {
+    public void pay() {
+        Money amount = new Money();
+        for (Iterator it = timecards.iterator(); it.hasNext(); ) {
+            Timecard card = (Timecard)it.next();
+            if (payPeriod.contains(date)) {
+                amount.add(card.getHours() * payRate);
+            }
+		}
+        payDispatcher.pay(this, date, amount);
+    }
+...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Допустим мы хотим логировать тот факт, что мы платим какому-то определенному, особенному работнику. Первое, что мы можем сделать - это создать например, класс, который тоже будет иметь метод &lt;code&gt;pay()&lt;/code&gt; и вызвать его. Экземпляр этого классу будет принадлежать &lt;code&gt;Employee&lt;/code&gt;, и выполнять работу по логированию в своем методе &lt;code&gt;pay()&lt;/code&gt;, а затем делегировать работнику, так что бы он совершил оплату. Обычно, самый простой способ сделать это, если вы не можете создать объект при тестировании, это выделить интерфейс от класса и реализовать его.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;В следующем примере &lt;code&gt;LoggingEmployee&lt;/code&gt; наследует &lt;code&gt;Employee&lt;/code&gt; и таким образом после логирования мы можем выполнить метод оплаты от экземпляра &lt;code&gt;Employee&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;class LoggingEmployee extends Employee {
+    public LoggingEmployee(Employee e) {
+        employee = e;
+	}
+    public void pay() {
+        logPayment();
+        employee.pay();
+    }
+    private void logPayment() {
+        ...
+	}
+...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Эта техника называется - &lt;code&gt;Декоратор паттерн&lt;/code&gt;. Мы создали объекты класс, которые &quot;оборачивают&quot; исходные объекты и позволяют добавить какое-то новое поведение. Класс-обертка должен иметь такой же интерфейс, что и исходный класс, чтобы клиенты даже не заметили, что работают с другим классом. В нашем примере &lt;code&gt;LoggingEmployee&lt;/code&gt; - это декоратор &lt;code&gt;Employee&lt;/code&gt;. Он должен иметь метод &lt;code&gt;pay()&lt;/code&gt; и все остальные методы которые есть у &lt;code&gt;Employee&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Декоратор - это хороший способ добавить функциональность,если редактируемый метод &lt;code&gt;pay()&lt;/code&gt; уже вызывается из кучи мест. Однако есть еще способ обернуть метод без декоратора. Давайте представим, что нам нужно логировать вызовы метода &apos;pay()&apos; всего из одного места. Вместо того ,чтобы оорачивать это все в декоратор, мы можем положитье его в другой класс, который принимает экземпляр &lt;code&gt;Employee&lt;/code&gt;, производит оплату, а затем записывает инофрмацию об этом событии. Давайте напишем вот таклй маленький класс:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;class LoggingPayDispatcher {
+     private Employee e;
+         public LoggingPayDispatcher(Employee e) {
+            this.e = e;
+         }
+
+         public void pay() {
+            employee.pay();
+            logPayment();
+         }
+
+         private void logPayment() {
+         ...
+     }
+     ...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Сейчас мы можем создать экземпляр &lt;code&gt;LogPayDispatcher&lt;/code&gt;  одном месте, только в том,где нужно записывать сообщения о платежах.
+Now we can create LogPayDispatcher in the one place where we need to log payments.
+The key to Wrap Class is that you are able to add new behavior into a system without adding it to an existing
+class. When there are many calls to the code you want to wrap, it often pays to move toward a decorator-ish
+wrapper. When you use the decorator pattern, you can transparently add new behavior to a set of existing calls
+like pay()all at once. On the other hand, if the new behavior only has to happen in a couple of places,
+creating a wrapper that isn&amp;#8217;t decorator-ish can be very useful. Over time, you should pay attention to the
+responsibilities of the wrapper and see if the wrapper can become another high-level concept in your system.&lt;/p&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Метод - обёртка</title>
+      <link>http://jbake.org/blog/2014/wrap-method.html</link>
+      <pubDate>Sat, 25 Oct 2014 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2014/wrap-method.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Раньше, такой способ называли &quot;временным связыванием&quot;, код становится довольно некрасивым, если делать это слишком часто. Если группировать процедуры вместе только потому что они должны выполняться в одно и тоже время, то связь между ними весьма слаба. Позже может выясниться, что один метод не используется без другого, и с этой точки зрения они должны логически быть одним методом. Но не торопитесь склеивать их в один метод, потому что вернуть назад может быть нелегко.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Когда нужно добавить какое-то поведение, вы можете это сделать не таким запутанным путем. Один подход - это использовать &quot;Ветвлящийся метод&quot;, но существует и другой подход, который иногда очень полезен. Называется он - &quot;метод обертка&quot;. Пример:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class Employee
+{
+ ...
+	 public void pay() {
+		 Money amount = new Money();
+		 for (Iterator it = timecards.iterator(); it.hasNext(); ) {
+			 Timecard card = (Timecard)it.next();
+			 if (payPeriod.contains(date)) {
+			 	amount.add(card.getHours() * payRate);
+			}
+		}
+		payDispatcher.pay(this, date, amount);
+	 }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;В этом методе складывается время работы за день для одного работника  и затем отправляется в &lt;code&gt;PayDispatcher&lt;/code&gt;. Давайте предположим, что требования изменились. Каждый раз, когда мы платим работнику, нам нужно обновлять файл с информацией о работнике для отправки в какую-либо систему отчетов. Самый простой вариант - это добавить код в метод &lt;code&gt;pay()&lt;/code&gt;. В конце концов наш новый код должен выполняться вместе с методом &lt;code&gt;pay()&lt;/code&gt;, правильно  же? Давайте так и сделаем:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class Employee {
+	 private void dispatchPayment() {
+		Money amount = new Money();
+		for (Iterator it = timecards.iterator(); it.hasNext(); ) {
+			Timecard card = (Timecard)it.next();
+			if (payPeriod.contains(date)) {
+				amount.add(card.getHours() * payRate);
+		 	}
+		}
+	 	payDispatcher.pay(this, date, amount);
+	}
+
+	public void pay() {
+	 	logPayment();
+		dispatchPayment();
+	}
+
+	private void logPayment() {
+		 ...
+	}
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Мы переименовали метод &lt;code&gt;pay()&lt;/code&gt; в &lt;code&gt;dispatchPayment()&lt;/code&gt; и сделали его &lt;code&gt;private&lt;/code&gt;. Затем создали новый метод &lt;code&gt;pay(), который бужет вызывать наш `dispatchPayment()&lt;/code&gt;. Новый метод &lt;code&gt;pay()&lt;/code&gt; сначала логирует момент оплаты, а потом отправляет ее на обработку. Те клиенты, которые используют метод &lt;code&gt;pay()&lt;/code&gt; не узнают об изменении, да им и не нужно. Они как обычно будут вызывать метод &apos;pay()&apos;, и все будет по-старому.
+Это один из возможных видов &quot;метода обертки&quot;. Мы создаем метод с названием нашего старого метода, и в теле вызываем старый метод. Делается это для того, чтобы добавить новое поведение к существующему методу. Каждый раз, когда клиент вызывает метод &lt;code&gt;pay()&lt;/code&gt; происходит логирование - и такой вид &quot;метода обертки&quot; оказался, как раз к месту.
+Существуют также второй вариант этого подхода, который мы можем использовать, когда хотим только добавить новый метод, метод, который никто кроме нас не вызывает. В предыдущем примере, если мы хотим, чтобы логирование было более явным, мы можем добавить метод &lt;code&gt;makeLoggedPayment()&lt;/code&gt; в классе &lt;code&gt;Employee&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class Employee
+{
+	public void makeLoggedPayment() {
+		logPayment();
+	 	pay();
+	}
+
+	public void pay() {
+	...
+	}
+
+	private void logPayment() {
+	 ...
+	}
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Метод обертка - это хороший способ добавить новый функционал, сохраняя при этом своеобразное разделение со старым кодом. Существует только несколько минусов.
+Первый - это то, что новый функционал не смешан с логикой старого. Подождите, разве я сказал это плохо? Вообще-то, нет, в общем - зависит от ситуации. Второй минус - это то, что вы должны придумать новое имя для старого метода.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;В нашем случае, я переименовал &lt;code&gt;pay()&lt;/code&gt;  в &lt;code&gt;dispatchPayment()&lt;/code&gt;. Это имя конечно, притянуто за уши. Мне не очень нравится, как заканчивается код в нашем примере. Метод &lt;code&gt;dispatchPayment()&lt;/code&gt; делает гораздо больше, чем просто &quot;обрабатывает платеж&quot;: он так же вычисляет сумму платежа. Если бы я хотел протестировать этот метод, то скорее всего я выделелил бы еще одну функцию - &lt;code&gt;calculatePay()&lt;/code&gt; и тогда бы метод &lt;code&gt;pay()&lt;/code&gt; выглядел как-то так:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public void pay() {
+	logPayment();
+	Money amount = calculatePay();
+	dispatchPayment(amount);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Теперь, кажется, каждый метод делает только то - что должен.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Вот шаги, которые мы сделали в первой версии нашего метода - обертки:
+. Находим метод, который будем менять
+. Если изменение может быть сформулировано, как последовательность утверждений, то переименовываем этот метод, а рядом создаем новый метод с именем и сигнатурами предыдущего.
+. Из старого делаем вызов нового
+. Добавляем необходимый код в старый метод и покрываем тестами - если это возможно&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Во второй версии метода обертки:
+. Находим метод, который будем менять
+. Если изменение может быть сформулированно, как последовательность утверждений, то создаем новый метод для этого
+. Создаем третий метод, который будет вызывать наш новый метод, а затем старый&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Минусы&quot;&gt;Минусы&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Иногда приводит к менее понятным именам методов. Например метод &lt;code&gt;pay()&lt;/code&gt; мы переименовали в &lt;code&gt;dispatchPay()&lt;/code&gt;, который менее интуитивно понятен, только потому что нам нужно какое-то новое имя метода. Конечно ,если у вас есть какие-то инструменты для рефакторинга, которые позволяют быстро переименовывать методы - это этот минус не такой болезненный.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Плюсы&quot;&gt;Плюсы&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Не увеличивает размеры изначальных методов&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Добавляемый функционал не зависит от старого функционала&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Ветвление классом</title>
+      <link>http://jbake.org/blog/2014/sprout-class.html</link>
+      <pubDate>Tue, 14 Oct 2014 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2014/sprout-class.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;В этом случае, вы можете создать другой класс, который будет содержать в себе необходимые изменения, чтобы использовать их в исходном классе.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Давайте взглянем на простой пример:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;std::string QuarterlyReportGenerator::generate()
+{
+    std::vector &amp;lt; Result &amp;gt; results = database.queryResults(
+        beginDate, endDate);
+    std::string pageText;
+    pageText += &quot;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;&quot;
+    &quot;Quarterly Report&quot;
+    &quot;&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body&amp;gt;&amp;lt;table&amp;gt;&quot;;
+    if (results.size() != 0) {
+        for (std::vector &amp;lt; Result &amp;gt; ::iterator it = results.begin(); it != results.end(); ++it) {
+            pageText += &quot;&amp;lt;tr&amp;gt;&quot;;
+            pageText += &quot;&amp;lt;td&amp;gt;&quot; + it - &amp;gt; department + &quot;&amp;lt;/td&amp;gt;&quot;;
+            pageText += &quot;&amp;lt;td&amp;gt;&quot; + it - &amp;gt; manager + &quot;&amp;lt;/td&amp;gt;&quot;;
+            char buffer[128];
+            sprintf(buffer, &quot;&amp;lt;td&amp;gt;$%d&amp;lt;/td&amp;gt;&quot;, it - &amp;gt; netProfit / 100);
+            pageText += std::string(buffer);
+            sprintf(buffer, &quot;&amp;lt;td&amp;gt;$%d&amp;lt;/td&amp;gt;&quot;, it - &amp;gt; operatingExpense / 100);
+            pageText += std::string(buffer);
+            pageText += &quot;&amp;lt;/tr&amp;gt;&quot;;
+        }
+    } else {
+        pageText += &quot;No results for this period&quot;;
+    }
+    pageText += &quot;&amp;lt;/table&amp;gt;&quot;;
+    pageText += &quot;&amp;lt;/body&amp;gt;&quot;;
+    pageText += &quot;&amp;lt;/html&amp;gt;&quot;;
+    return pageText;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Давайте, предположим, что нам нужно добавить в этот код html заголовок для таблицы. Заголвок должен выглядеть вот так:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&quot;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Department&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;Manager&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;Profit&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;Expenses&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Кроме того, предположим, что это большой класс, и что покрытие его тестами займет по времени где-то день - а мы не можем себе этого позволить. Попробуем инкапсулировать все наши изменения в новом классе  &lt;code&gt;QuarterlyReportTableHeaderProducer&lt;/code&gt; :&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;using namespace std;
+class QuarterlyReportTableHeaderProducer
+{
+	public:
+	 string makeHeader();
+	};
+	string QuarterlyReportTableProducer::makeHeader()
+	{
+	 return &quot;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Department&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;Manager&amp;lt;/td&amp;gt;&quot;
+	 &quot;&amp;lt;td&amp;gt;Profit&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;Expenses&amp;lt;/td&amp;gt;&quot;;
+	}
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Позже мы сможем вызвать его методы из класса&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;QuarterlyReportGenerator::generate():
+...
+QuarterlyReportTableHeaderProducer producer;
+pageText += producer.makeHeader();
+...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Уверен, что глядя, на этом изменение вы скажите -&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;&quot;Для такого маленького изменения создавать целый класс? Как еще один класс улучшит мою архитектуру? Он только усложнит код.&quot;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Да, с этой точки зрения это правда. единственная причина, по которой можно такое сделать - это большое количество зависимостей, но давай-те присмотримся поближе.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;А что если назвать этот класс &lt;code&gt;QuarterlyReportTableHeaderGenerator&lt;/code&gt; и вынести из него интерфейс?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;class QuarterlyReportTableHeaderGenerator
+{
+	public:
+	 string generate();
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;code&gt;QuarterlyReportTableHeaderGenerator&lt;/code&gt; это такой же генератор, как и &lt;code&gt;QuarterlyReportGenerator&lt;/code&gt;. У них обоих есть метод &lt;code&gt;generate()&lt;/code&gt;, который возвращает строковое значение. Можно сделать интерфейс, который обобщит код создания:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;class HTMLGenerator
+{
+public:
+ virtual ~HTMLGenerator() = 0;
+ virtual string generate() = 0;
+};
+class QuarterlyReportTableHeaderGenerator : public HTMLGenerator
+{
+public:
+ ...
+ virtual string generate();
+ ...
+};
+class QuarterlyReportGenerator : public HTMLGenerator
+{
+public:
+ ...
+ virtual string generate();
+ ...
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Также мы можем покрыть &lt;code&gt;QuarterlyReportGenerator&lt;/code&gt; тестами и изменить его реализацию так, чтобы он выполнял большинство своей работы с помощью генераторов.
+В этом случае, мы можем обернуть класс концепцией, которую уже используем в приложении. Возможно, что в некоторых классах, мы не сможем так сделать. Но это не значит, что нужно сдаваться. Некоторые &quot;ветвящиеся классы&quot; не приводятся к концепции всего приложения, вместо этого они становятся новыми! Может получится так, что через некоторое время после создания &quot;ветвящегося класса&quot; вы найдете похожу концепцию.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Через два месяца после создания &quot;ветвящегося класса&quot; ваше мнение о нем может изменится. Сам факт добавления нового класса в систему дает вам пищу для размышления. Когда вы будете делать изменения где-то рядом с ним обязательно подумайте - являются ли эти изменения частью новой концепции или требуют изменения старой концепции. Это все входит в процесс проектирования архитектуры вашего приложения.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;По сути всего два случая, когда нужно задуматься о применении &quot;ветвящегося класса&quot;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Первый - ваши изменения в классе добавляют новую зону ответсвенности в одном из классов. Например, в приложении для расчета налогов, некоторые отчисления возможны только в определенные времена года. Можно с легкостью добавить проверку на принадлежность к времени года к классу &lt;code&gt;TaxCalculator&lt;/code&gt;, но эта проверка не входит в зону ответственности &lt;code&gt;TaxCalculator&lt;/code&gt; - рассчитывать налог? Возможно, это должен быть какой-то другой класс.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Второй пример - как раз рассмотрен выше. У нас небольшая функциональность, которую, в принципе, мы можем добавить к существующему классу, но мы не сможем протестировать этот метод. Если нам повезло, и мы отдельно можем покрыть тестами только этот метод, то &quot;метод ветвления&quot; нам подойдет, но к сожалению, не всегда так везет.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Хотя у обоих подходов достаточно разная мотивация для применения, в конечном итоге результат примерно один. Является ли добавляемая функциональность настолько значимой, чтобы быть новой зоной ответсвенности - это тяжелое решение. Даже больше, из-за того, что код все время меняется, решение использовать подход &quot;ветвящийся класс&quot; часто выглядит лучше в ретроспективе.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Плюсы_и_минусы&quot;&gt;Плюсы и минусы&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Основное преимущество использования &quot;класса&quot; - это своеобразный взгляд в будущее, уверенность в том, если придется менять еще раз, то вы будете к этому готовы.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Ветвление методом</title>
+      <link>http://jbake.org/blog/2014/sprout-method.html</link>
+      <pubDate>Tue, 14 Oct 2014 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2014/sprout-method.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Самое сложное в этом всем - это решиться все-таки покрыть сначала тестами, находясь под давлением того, что вы не знаете сколько времени уйдет на добавлении новой фичи. Часто в &quot;легаси&quot; проектах очень сложно определить сколько времени потребуется на добавление фичи. Существует несколько техник.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Когда программисту говорят добавить в приложение новую функциональность, это можно воспринимать в первую очередь, как последовательность таких действий как:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Напиши новый метод или добавь новый кусок кода к существующему методу.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;А также вызови его из места, где нужно внедрить эту новую функциональность.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Удостоверься, что все работает, как надо.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Обычно написать тесты, покрывающие именно места вызова нашего нового метода нелегко, но зато по крайней мере
+мы можем &quot;покрыть тестами&quot; добавленный нами новый метод.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Представьте, себе такой код.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Пример.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class TransactionGate {
+	 public void postEntries(List entries) {
+		 for (Iterator it = entries.iterator(); it.hasNext(); ) {
+			 Entry entry = (Entry)it.next();
+			 entry.postDate();
+		 }
+		 transactionBundle.getListManager().add(entries);
+	 }
+ ...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Например, нам нужно добавить код для проверки того, что ни один из новых вхождений еще не находится в &lt;code&gt;transactionBundle&lt;/code&gt; до того, как установим дату этому вхождению и добавим в &lt;code&gt;transactionBundle.getListManager()&lt;/code&gt;. Глядя на &lt;code&gt;postEntries&lt;/code&gt;, кажется, что новое изменение нужно добавить в начало метода - до цикла. Но, на самом деле, это должно случится внутри цикла. Например, мы можем сделать так:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class TransactionGate
+{
+	 public void postEntries(List entries) {
+		 List entriesToAdd = new LinkedList();
+			 for (Iterator it = entries.iterator(); it.hasNext(); ) {
+				 Entry entry = (Entry)it.next();
+				 if (!transactionBundle.getListManager().hasEntry(entry) {
+					entry.postDate();
+				 	entriesToAdd.add(entry);
+			 	}
+		 	}
+	 	transactionBundle.getListManager().add(entriesToAdd);
+	 }
+ ...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Наша вставка кажется небольшим изменением функционала, но на самом деле это не так. Теперь, как мы можем проверить, что наше изменение делает именно, то что мы хотим? Ведь нет никакого разделителя, который бы отличал новый код от старого. Хуже еще то, что мы сделали код немного непонятней. Мы смешали две операции здесь: установка даты и проверка на дублирование.
+Этот метод довольно небольшой, но уже менее понятный и плюс - мы добавили временную переменную.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Добавление временной переменной - необязательно плохо, но иногда оно приносит с собой и новый код. Если изменение, которое мы сделали, включает работу со всеми уникальными вхождениями до того,как мы их добавим, то тогда существует только одно место, где изменение должно находится : прямо в этом методе.  Было бы заманчиво просто положить наше новое изменение прямо в этот метод, но может мы можем сделать это каким-либо другим способом?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Да. Мы можем вынести наш код в отдельную операцию. Мы можем использовать подход TDD (&lt;a href=&quot;http://en.wikipedia.org/wiki/Test-driven_development&quot;&gt;Test-Driven-Development&lt;/a&gt;) и создать новый метод &lt;code&gt;uniqueEntries&lt;/code&gt;:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class TransactionGate
+{
+ ...
+ List uniqueEntries(List entries) {
+	 List result = new ArrayList();
+	 for (Iterator it = entries.iterator(); it.hasNext(); ) {
+		Entry entry = (Entry)it.next();
+		if (!transactionBundle.getListManager().hasEntry(entry) {
+			result.add(entry);
+	 	}
+	 }
+	 return result;
+ }
+ ...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;В этом случае будет легко написать код для тестирования нового добавленного метода. Теперь мы можем вернуться нашему изначальному примеру и вызвать метод.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class TransactionGate {
+ ...
+ public void postEntries(List entries) {
+	 entriesToAdd = uniqueEntries(entries);
+	 for (Iterator it = entriesToAdd.iterator(); it.hasNext(); ) {
+		 Entry entry = (Entry)it.next();
+		 entry.postDate();
+	 }
+	 transactionBundle.getListManager().add(entriesToAdd);
+ }
+ ...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;У нас еще все-таки осталась одна временная переменная, но код стал более упорядоченным. Если нам понадобится добавить еще функциональность, которой понадобится список уникальных  вхождений, то мы сможем использовать этот же метод. Если в дальнейшем, наш метод будет вызываться очень часто, то мы легко сможем вынести его в новый класс. Фокус в том, чтобы держать этот метод небольшим и понятным с первого взгляда - это увеличивает читаемость все класса в целом.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Это был пример добавления функционала путем &quot;ответвления&quot; с помощью метода. В процессе мы выполнили следующие шаги:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;olist arabic&quot;&gt;
+&lt;ol class=&quot;arabic&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;Идентифицировать место, в котором требуются изменения.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Если изменение формулируется как последовательность утверждений в одном месте в методе, написать вызов метода, который будет включать все эти утверждения.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Определить какие локальные переменные нужны для вызова из исходного метода и подставить все необходимые аргументы.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Определить должен ли ответвяющий метод возвращать какое-нибудь значение.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Написать тест на наш новый метод.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Я рекомендую использовать метод ветвления когда вы видите, что назначение нового кода отличается от уже существующего или вы не можете покрыть тестами изначальный метод. Предпочтительно, конечно, добавить этот метод в одну строчку.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Иногда, когда вы хотите использовать метод ветвления, зависимостей в вашем классе настолько много, что вы не можете создать экземпляр без создания большого количества заглушек и фейковых объектов.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Альтернатива этому подходу - это передавать везде &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Когда не подошли предыдущие подходы, рассмотрите возможность сделать метод &lt;code&gt;public static&lt;/code&gt;. Вы можете передать экземпляр исходного класса как аргумент, это позволит сделать вам ваши изменения.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Это может показаться странным - делать метод статическим для наших целей, но в устаревшем (legacy) коде это может быть полезным.
+Как правило, много статических методов в одном классе - это плацдарм для рефакторинга. Часто, если вы видите несколько статических методов и вы замечаете ,что они работают с одними и теме же переменными, лучше перенести эти статические методы в новый класс, и сделать их методами экземпляра. Когда понадобится вернуть их назад - это будет несложно.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Минусы&quot;&gt;Минусы&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Код не становится лучше, мы просто добавляем новый метод, который будет покрыт тестом.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Плюсы&quot;&gt;Плюсы&lt;/h3&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Четкое разделение старого кода и нового&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Использована литература&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist bibliography&quot;&gt;
+&lt;ul class=&quot;bibliography&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a id=&quot;legacy&quot;&gt;&lt;/a&gt;[legacy] Working Effectively with Legacy Code. p.51&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Обзор книги &quot;Working with legacy code&quot;</title>
+      <link>http://jbake.org/blog/2014/working-with-legacy-code.html</link>
+      <pubDate>Sun, 5 Oct 2014 00:00:00 +0400</pubDate>
+      <guid isPermaLink="false">blog/2014/working-with-legacy-code.html</guid>
+      	<description>
+	&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_Изменения_кода_проекта&quot;&gt;Изменения кода проекта&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Если копнуть глубже, то существуют всего 4 причины для изменения кода в проекте:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;olist arabic&quot;&gt;
+&lt;ol class=&quot;arabic&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;Добавить новую &lt;a href=&quot;https://ru.wikipedia.org/wiki/%D0%A4%D0%B8%D1%87%D0%B0&quot;&gt;фичу&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://ru.wikipedia.org/wiki/%D0%91%D0%B0%D0%B3&quot;&gt;Зафиксить баг&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Улучшить дизайн&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Оптимизировать что-то&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_Добавление_фичи_и_устранение_бага&quot;&gt;Добавление фичи и устранение бага&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Добавление новой фичи кажется самым простым изменением, которое мы можем сделать. Допустим программа ведет себя одним образом, а пользователи говорят, что должна вести себя по другому.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Давайте, предположим, что мы работаем над веб-приложением, и менеджер говорит нам, что он хочет сдвинуть логотип сайта с лево на право. Обсудив это с ним, мы понимаем, что на самом деле это не так просто. Хотя менеджер просит передвинуть только логотип, на самом деле он хочет еще некоторых изменений. Может быть он захочет добавить анимации в следующем релизе? Нужно понять - это фиксинг бага или добавление новой фичи?  Это зависит от вашей позиции&amp;#8230;&amp;#8203;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;С точки зрения заказчика - он абсолютно определенно просит вас решить конкретную проблему. Может быть менеджер посмотрел на сайт и собрал митинг с людьми из своего отдела, и они решили изменить положение логотипа, поэтому и запросили данную фичу.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;С точки зрения разработчика, изменение вполне может выглядеть, как новая фича. В некоторых компаниях сдвиг логотипа рассматривают как баг фикс, несмотря на тот факт, что команда собирается делать достаточно много новой работы. На самом деле все это очень субъективно. Кто-то видит это как багфикс, кто-то как фичу.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Грустно, то что во многих компаниях багфиксы и фичи учитываются отдельно из-за требований всяческих отделов качества и тестирования. На человеческом уровне можно до бесконечности спорить является ли добавляемое изменение фичей или багофиксом, но это в конечном итоге это всего лишь изменение кода и исходников. Технически, для нас важно изменение поведения: большая разница между добавлением нового поведения и изменения старого.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;Поведение - это одно из главных понятий в разработке программного обеспечения. Это то, от чего зависят пользователи программы. Пользователи любят, когда мы добавляем новое поведение(если они его очень хотели), но если мы убираем или изменяем поведение программы(пытаясь починить какие-то баги), то пользователи перестают верить нам.&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;В нашем примере про логотип, давайте попробуем понять - мы добавляем новое поведение? Да, после нашего изменения система будет отображать логотип с другой стороны страницы. Избавляемся ли мы от какого либо поведения? Да, мы не хотим, чтобы логотип был слева. Давайте копнем немного глубже. Предположим,что заказчик хочет добавить логотип в правую часть страницы, но слева еще нет логотипа. Да, мы собираемся добавить новое поведение, но заменяем ли мы какое-то старое? Так что мы изменяем, добавляем или оба действия сразу?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Получается, что нужно четко определить различие между этими действиями - это полезно для разработчика. Если мы должны изменить код, мы можем изменить поведение. Если мы только добавляем код и вызываем его откуда-то, мы всегда добавляем новое поведение. Давайте взглянем на другой пример:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class CDPlayer
+{
+ public void addTrackListing(Track track) {
+ ...
+ }
+ ...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Добавим новый метод:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class CDPlayer
+{
+ public void addTrackListing(Track track) {
+ ...
+ }
+ public void replaceTrackListing(String name, Track track) {
+ ...
+ }
+ ...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Когда мы добавили новый метод, добавили ли мы новое поведение или изменили старое? Ответ: нет. Добавление нового метода не меняет поведение пока этот новый метод где-то не вызван. Давайте сделаем другое изменение. Добавим новую кнопку в интерфейс CD плеера. Кнопка дает пользователям возможность заменить играющий трек. Тем самым мы добавили новое поведение, которое содержится в методе &lt;code&gt;replaceTrackListing()&lt;/code&gt;, но также мы очень тонко изменили поведение. Пользовательский интерфейс отобразится совершенно по другому при нажатию на кнопку. Возможно, UI будет отображаться на микросекунду дольше. Кажется невозможным добавить новое поведение без изменения его в какой-то степени.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+
+  </channel> 
+</rss>
