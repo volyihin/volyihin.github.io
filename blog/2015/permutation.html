@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Volyihin</title>
+    <title>Перестановочки</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The personal blog of volyihin, professional java developer.  Passionate about #java #groovy #angularjs #web">
     <meta name="author" content="https://twitter.com/volyihin">
@@ -78,34 +78,89 @@
         </div>
       </div>
       <div class="container-fluid">
-	<div class="row-fluid">
-	
-		<div class="span6 offset3">
-	
-			<div class="page-header">
-				<h1>Tag: blog</h1>
-			</div>
-			
-			<!--<ul>-->
-					<h4>November 2014</h4>
-					<ul>
-				
-				<li>10 - <a href="/blog/2014/image-resize-groovy.html">Изменить размер фотографий с помощью groovy и imgscalr</a></li>
-				
-				<li>05 - <a href="/blog/2014/wrap-class.html">Класс - обёртка</a></li>
-						</ul>
-						<h4>October 2014</h4>
-						<ul>
-				
-				<li>25 - <a href="/blog/2014/wrap-method.html">Метод - обёртка</a></li>
-				
-				<li>14 - <a href="/blog/2014/sprout-class.html">Ветвление классом</a></li>
-				
-				<li>14 - <a href="/blog/2014/sprout-method.html">Ветвление методом</a></li>
-			</ul>
+    <div class="row-fluid">
+
+				<div class="span6 offset3">
+
+					<div class="page-header">
+						<h1>Перестановочки</h1>
+					</div>
+
+					<p><em>August 28, 2015</em></p>
+
+				</div>
 		</div>
-	</div>
-	
+
+
+		<div class="row-fluid">
+
+				<div class="span2 offset1">
+					<p/>
+					<p class="text-right"><em></em>
+								<a href="/tags/algorithm.html">algorithm</a><br/>
+					</p>
+				</div>
+
+        <div class="span6">
+
+        	<p><div class="sect1">
+<h2 id="_Перестановочки"><a class="anchor" href="#_Перестановочки"></a>Перестановочки</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../../img/permutation.png" alt="permutation">
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">def permutation(String input){
+          permutation("", input);
+}
+
+def permutation(String perm, String word) {
+        if (word.isEmpty()) {
+            println(perm + word);
+
+        } else {
+            for (int i = 0; i &lt; word.length(); i++) {
+                permutation(perm + word.charAt(i), word.substring(0, i)
+                                        + word.substring(i + 1, word.length()));
+            }
+        }
+}
+
+permutation("123")</code></pre>
+</div>
+</div>
+</div>
+</div></p>
+
+					<p><em>Share this:</em></p>
+          <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/2015/permutation.html" data-via="SonOfGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/2015/permutation.html"></div>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/2015/permutation.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/2015/permutation.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+          </p>
+
+          <hr>
+
+          <div id="disqus_thread">
+          <script type="text/javascript">
+                var disqus_shortname = 'mikemcgarr';
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+    </div>
+
 		</div>
 		<div id="push"></div>
     </div>

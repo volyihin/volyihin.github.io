@@ -6,9 +6,365 @@
     <atom:link href="http://jbake.org/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Tue, 8 Sep 2015 14:49:12 +0300</pubDate>
-    <lastBuildDate>Tue, 8 Sep 2015 14:49:12 +0300</lastBuildDate>
+    <pubDate>Tue, 8 Sep 2015 15:33:22 +0300</pubDate>
+    <lastBuildDate>Tue, 8 Sep 2015 15:33:22 +0300</lastBuildDate>
 
+    <item>
+      <title>Перестановочки</title>
+      <link>http://jbake.orgblog/2015/permutation.html</link>
+      <pubDate>Fri, 28 Aug 2015 00:00:00 +0300</pubDate>
+      <guid isPermaLink="false">blog/2015/permutation.html</guid>
+      	<description>
+	&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_Перестановочки&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Перестановочки&quot;&gt;&lt;/a&gt;Перестановочки&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/permutation.png&quot; alt=&quot;permutation&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-groovy&quot; data-lang=&quot;groovy&quot;&gt;def permutation(String input){
+          permutation(&quot;&quot;, input);
+}
+
+def permutation(String perm, String word) {
+        if (word.isEmpty()) {
+            println(perm + word);
+
+        } else {
+            for (int i = 0; i &amp;lt; word.length(); i++) {
+                permutation(perm + word.charAt(i), word.substring(0, i)
+                                        + word.substring(i + 1, word.length()));
+            }
+        }
+}
+
+permutation(&quot;123&quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Поделить связанный список по значению</title>
+      <link>http://jbake.orgblog/2015/partition_linked_list.html</link>
+      <pubDate>Thu, 27 Aug 2015 00:00:00 +0300</pubDate>
+      <guid isPermaLink="false">blog/2015/partition_linked_list.html</guid>
+      	<description>
+	&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_Поделить_связанный_список_по_значению&quot;&gt;Поделить связанный список по значению&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h1 id=&quot;_Задача&quot; class=&quot;sect0&quot;&gt;Задача&lt;/h1&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Дан связанный список и целое число //N// из этого списка. Поделить связный список вокруг одного узла, так чтобы узлы с меньшим значением находились до него, а узлы со значениями больше //N// после него.&lt;/p&gt;
+&lt;/div&gt;
+&lt;h1 id=&quot;_Решение&quot; class=&quot;sect0&quot;&gt;Решение&lt;/h1&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Решение похоже на&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This is much like the partition function for quick sort. When using arrays we have to be careful not to shift elements around, because array shifts are expensive operations. But when we use a linked list we don’t have to worry about this. We could have a list that stores all values less than N and a list that stores all values greater than N and equal to N. Then we can merge the 2 lists and the N node together to get the resulting list. Here is the outline for the algorithm&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;create 2 empty lists, one to store values smaller, other to store values greater
+scan the list from head to tail
+at each step if the current node is smaller than N append it to the smaller list
+if the current node is larger than N append it to the larger list
+append the list is complete append N and larger to the smaller list to have the final result
+Here is the code&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;static LinkedListNode partition(LinkedListNode head, int v) {
+        LinkedListNode smHead = null;
+        LinkedListNode smTail = null;
+
+        LinkedListNode gtHead = null;
+        LinkedListNode gtTail = null;
+
+        LinkedListNode cur = head;
+        while(cur != null) {
+            LinkedListNode next = cur.next;
+            cur.next = null;
+            if (cur.data &amp;lt; v) {
+                if (smHead == null) {
+                    smHead = cur;
+                    smTail = smHead;
+                } else {
+                    smTail.next = cur;
+                    smTail = cur;
+                }
+            } else {
+                if (gtHead == null) {
+                    gtHead = cur;
+                    gtTail = gtHead;
+                } else {
+                    gtTail.next = cur;
+                    gtTail = cur;
+                }
+            }
+            cur = next;
+        }
+
+        if (smHead == null) return gtHead;
+        smTail.next = gtHead;
+        return smHead;
+    }&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Первый релиз в Maven Central</title>
+      <link>http://jbake.orgblog/2015/maven_central.html</link>
+      <pubDate>Wed, 26 Aug 2015 00:00:00 +0300</pubDate>
+      <guid isPermaLink="false">blog/2015/maven_central.html</guid>
+      	<description>
+	&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_Первый_релиз_в_maven_central&quot;&gt;Первый релиз в Maven Central&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/sonatype.png&quot; alt=&quot;sonatype&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Основная мысль RTFM!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Единственный верный и правильный мануал по публикации в централ - &lt;a href=&quot;http://central.sonatype.org/pages/apache-maven.html&quot; class=&quot;bare&quot;&gt;http://central.sonatype.org/pages/apache-maven.html&lt;/a&gt;, остальное все - чушь и старье. Надолго запомню, что читать нужно только официальную документацию - все остальное - не актуально. Потратил на этой ерунде долгие 2 часа, а когда нашел мануал - справился за 15 минут. Хотя нужно быть честным - и пока автоматически у меня не получилось &quot;релизнуть&quot;. Заходил в &lt;a href=&quot;https://oss.sonatype.org&quot; class=&quot;bare&quot;&gt;https://oss.sonatype.org&lt;/a&gt; и загружал библиотеки руками.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Теперь с нетерпением жду когда мое творенье, а точнее  сказать просто форкнутое чужое творенье появится в центральном репозиториии. А звучит то как - &lt;strong&gt;&quot;в Центральном!&quot;&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/update-maven.gif&quot; alt=&quot;update maven&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Итак про форкнутую библиотеку, если говорить по русски - то стыренную, а именно:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;скомпилированную;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;выложенную в централ;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Но стыренную официально с подтверждением, а точнее с отсутсвием такого от самого владельца.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/email-mongeez.png&quot; alt=&quot;email mongeez&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Так что совесть моя чиста. А тем временем скачать ее хотели многие, судите сами:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/mongeez-issues.png&quot; alt=&quot;mongeez issues&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/secondmarket/mongeez/issues/50&quot; class=&quot;bare&quot;&gt;https://github.com/secondmarket/mongeez/issues/50&lt;/a&gt; Источник&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Похоже пока заинтересованные люди работали в компании её поддерживали, а потом перестали, в то время как монга только развивалась и обрастала новыми инструментами.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/mongeez-commits.png&quot; alt=&quot;mongeez commits&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Новый дом библиотеки теперь тут - &lt;a href=&quot;https://github.com/volyihin/mongeez&quot; class=&quot;bare&quot;&gt;https://github.com/volyihin/mongeez&lt;/a&gt;. Скачать можно так:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&amp;lt;code&amp;gt;
+&amp;lt;dependency&amp;gt;
+  &amp;lt;groupId&amp;gt;com.github.volyihin&amp;lt;/groupId&amp;gt;
+  &amp;lt;artifactId&amp;gt;mongeez&amp;lt;/artifactId&amp;gt;
+  &amp;lt;version&amp;gt;0.9.5&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&amp;lt;/code&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;А вот и в самом централе:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/maven-central.png&quot; alt=&quot;maven central&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt;
+Мне только что пришло письмо от Олексия.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/mongeez-answer.png&quot; alt=&quot;mongeez answer&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;И вот теперь встала дилемма. С одной стороны релиз сделан, и мне не сильно нужна помощь, с другой стороны - совесть.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/dreaminess.jpg&quot; alt=&quot;dreaminess&quot; width=&quot;400px&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Веб-компоненты</title>
+      <link>http://jbake.orgblog/2015/web_components.html</link>
+      <pubDate>Wed, 26 Aug 2015 00:00:00 +0300</pubDate>
+      <guid isPermaLink="false">blog/2015/web_components.html</guid>
+      	<description>
+	&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_Веб_компоненты&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Веб_компоненты&quot;&gt;&lt;/a&gt;Веб-компоненты&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Непонятно как затесавшийся доклад про веб-компоненты на JEEConf
+- Less JS! Web components for back-end developers. (Olga Semeniuk, Belarus)&lt;/p&gt;
+&lt;/div&gt;
+&lt;iframe width=&quot;854&quot; height=&quot;480&quot; src=&quot;https://www.youtube.com/embed/aoCzBIGtUj0&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Очень понравилась такая очевидная вещь:&lt;/p&gt;
+&lt;/div&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot; lang=&quot;ru&quot;&gt;&lt;p lang=&quot;ru&quot; dir=&quot;ltr&quot;&gt;Не нужно писать собственные компоненты на JSF, PrimaFaces при миграции на новую версию они обязательно сломаются!&lt;/p&gt;&amp;mdash; Дима Волыхин (@volyihin) &lt;a href=&quot;https://twitter.com/volyihin/status/634350154661937152&quot;&gt;20 августа 2015&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Веб-компоненты состоят из следующих частей:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;olist arabic&quot;&gt;
+&lt;ol class=&quot;arabic&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Templates&lt;/strong&gt;. Фрагменты HTML, которые программист собирается использовать в будущем. Содержимое тегов &lt;strong&gt;&amp;lt;template&amp;gt;&lt;/strong&gt; парсится браузером, но не вызывает выполнение скриптов и загрузку дополнительных ресурсов (изображений, аудио…) пока мы не вставим его в документ.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Shadow DOM&lt;/strong&gt;. Shadow DOM позволяет изменять внутреннее представление HTML элементов, оставляя внешнее представление неизменным. Отличный пример — элементы &lt;strong&gt;&amp;lt;audio&amp;gt;&lt;/strong&gt; и &amp;lt;video&amp;gt;*. В коде мы размещаем один тег, а браузер отображает несколько элементов (слайдеры, кнопки, окно проигрывателя). В Chrome эти и некоторые другие элементы используют Shadow DOM.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Custom Elements&lt;/strong&gt;. Позволяют создавать и определять API собственных HTML элементов. В HTML теперь будут такие теги как &amp;lt;menu&amp;gt;* или &amp;lt;user-info&amp;gt;*?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Imports&lt;/strong&gt;. Импорт необходимых ресурсов для компонента - css например.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Хороший пример реализации компонентов это Polymer.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Пример объявления полимеровского элемента:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&amp;lt;dom-module id=&quot;element-name&quot;&amp;gt;
+
+  &amp;lt;style&amp;gt;
+    /* Импортируем css стили.*/
+  &amp;lt;/style&amp;gt;
+
+  &amp;lt;template&amp;gt;
+    &amp;lt;!--Шаблон элмента --&amp;gt;
+
+    &amp;lt;div&amp;gt;{{greeting}}&amp;lt;/div&amp;gt; &amp;lt;!-- динамические данные компонента--&amp;gt;
+  &amp;lt;/template&amp;gt;
+
+  &amp;lt;script&amp;gt;
+    //регистрируем элемент
+    Polymer({
+      is: &quot;element-name&quot;,
+
+      // переменные элемента
+
+      properties: {
+        // публичные переменные, которые мы определяем снаружи
+        greeting: {
+          type: String,
+          value: &quot;Hello!&quot;
+        }
+      }
+    });
+  &amp;lt;/script&amp;gt;
+
+&amp;lt;/dom-module&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;У полимера также есть библиотека уже готовых &lt;a href=&quot;https://elements.polymer-project.org/&quot; class=&quot;bare&quot;&gt;https://elements.polymer-project.org/&lt;/a&gt; компонент.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/polymer-cc.png&quot; alt=&quot;polymer cc&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://elements.polymer-project.org/elements/gold-cc-input&quot; class=&quot;bare&quot;&gt;https://elements.polymer-project.org/elements/gold-cc-input&lt;/a&gt; Компонент для ввода номера кредитной карты, естественно в материальном дизайне, куда без него.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Полимеровские компоненты очень похожи на ангуряровские директивы.
+В итоге синтаксис одинаковый, то есть сходу то и не отличить, что это полимер или ангуляр?&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;__a_href_https_www_polymer_project_org_1_0_class_bare_https_www_polymer_project_org_1_0_a_polymer&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#__a_href_https_www_polymer_project_org_1_0_class_bare_https_www_polymer_project_org_1_0_a_polymer&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://www.polymer-project.org/1.0/&quot; class=&quot;bare&quot;&gt;https://www.polymer-project.org/1.0/&lt;/a&gt; Polymer&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;  &amp;lt;gold-email-input auto-validate value=&quot;batman@gotham.org&quot;&amp;gt;&amp;lt;/gold-email-input&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;__a_href_https_angular_io_class_bare_https_angular_io_a_Ангуляр_2&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#__a_href_https_angular_io_class_bare_https_angular_io_a_Ангуляр_2&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://angular.io/&quot; class=&quot;bare&quot;&gt;https://angular.io/&lt;/a&gt; Ангуляр 2&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Обещает нам подобный синтаксис&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;../../img/angular2.png&quot; alt=&quot;angular2&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Невооруженным взглядом видно, что они одинаковы.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_Какой_же_в_итоге_выберет_гугл&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_Какой_же_в_итоге_выберет_гугл&quot;&gt;&lt;/a&gt;Какой же в итоге выберет гугл?&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Сопутствующие статьи:
+- &lt;a href=&quot;http://habrahabr.ru/post/210058/&quot; class=&quot;bare&quot;&gt;http://habrahabr.ru/post/210058/&lt;/a&gt; Составляющие веб-компонентов
+- &lt;a href=&quot;https://github.com/GoogleWebComponents&quot; class=&quot;bare&quot;&gt;https://github.com/GoogleWebComponents&lt;/a&gt; пример веб-компонентов от гугла
+- &lt;a href=&quot;https://elements.polymer-project.org/&quot; class=&quot;bare&quot;&gt;https://elements.polymer-project.org/&lt;/a&gt; полимеровские компоненты&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>Jquery победил. Пост из прошлого</title>
       <link>http://jbake.orgblog/2015/jquery_win.html</link>

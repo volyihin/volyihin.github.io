@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Захвачен ли монитор потоком на данный объект</title>
+    <title>Первый релиз в Maven Central</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The personal blog of volyihin, professional java developer.  Passionate about #java #groovy #angularjs #web">
     <meta name="author" content="https://twitter.com/volyihin">
@@ -83,10 +83,10 @@
 				<div class="span6 offset3">
 
 					<div class="page-header">
-						<h1>Захвачен ли монитор потоком на данный объект</h1>
+						<h1>Первый релиз в Maven Central</h1>
 					</div>
 
-					<p><em>April 14, 2015</em></p>
+					<p><em>August 26, 2015</em></p>
 
 				</div>
 		</div>
@@ -97,29 +97,123 @@
 				<div class="span2 offset1">
 					<p/>
 					<p class="text-right"><em></em>
-								<a href="/tags/threads.html">threads</a><br/>
+								<a href="/tags/maven.html">maven</a><br/>
 					</p>
 				</div>
 
         <div class="span6">
 
-        	<p><div class="paragraph">
-<p>Я знаю 2 способа проверить держит ли поток монитор на объект.</p>
+        	<p><div class="sect1">
+<h2 id="_Первый_релиз_в_maven_central">Первый релиз в Maven Central</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../../img/sonatype.png" alt="sonatype">
+</div>
 </div>
 <div class="paragraph">
-<p>1) Можно вызвать у объекта методы <code>wait()</code> или <code>notify()</code>, которые выбросят исключение если вызваны не из синхронизированного блока. И собственно алгоритм такой - вызываем <code>newspaper.wait()</code> и если этот метод бросает исключние, значит лока нет!</p>
+<p>Основная мысль RTFM!</p>
 </div>
 <div class="paragraph">
-<p>2) Можно вызвать статический метод <code>holdsLock(Object obj)</code>  класса Thread, который и вернет <code>true</code> если поток владеет монитором этого объекта.</p>
+<p>Единственный верный и правильный мануал по публикации в централ - <a href="http://central.sonatype.org/pages/apache-maven.html" class="bare">http://central.sonatype.org/pages/apache-maven.html</a>, остальное все - чушь и старье. Надолго запомню, что читать нужно только официальную документацию - все остальное - не актуально. Потратил на этой ерунде долгие 2 часа, а когда нашел мануал - справился за 15 минут. Хотя нужно быть честным - и пока автоматически у меня не получилось "релизнуть". Заходил в <a href="https://oss.sonatype.org" class="bare">https://oss.sonatype.org</a> и загружал библиотеки руками.</p>
+</div>
+<div class="paragraph">
+<p>Теперь с нетерпением жду когда мое творенье, а точнее  сказать просто форкнутое чужое творенье появится в центральном репозиториии. А звучит то как - <strong>"в Центральном!"</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../img/update-maven.gif" alt="update maven">
+</div>
+</div>
+<div class="paragraph">
+<p>Итак про форкнутую библиотеку, если говорить по русски - то стыренную, а именно:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>скомпилированную;</p>
+</li>
+<li>
+<p>выложенную в централ;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Но стыренную официально с подтверждением, а точнее с отсутсвием такого от самого владельца.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../img/email-mongeez.png" alt="email mongeez">
+</div>
+</div>
+<div class="paragraph">
+<p>Так что совесть моя чиста. А тем временем скачать ее хотели многие, судите сами:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../img/mongeez-issues.png" alt="mongeez issues">
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/secondmarket/mongeez/issues/50" class="bare">https://github.com/secondmarket/mongeez/issues/50</a> Источник</p>
+</div>
+<div class="paragraph">
+<p>Похоже пока заинтересованные люди работали в компании её поддерживали, а потом перестали, в то время как монга только развивалась и обрастала новыми инструментами.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../img/mongeez-commits.png" alt="mongeez commits">
+</div>
+</div>
+<div class="paragraph">
+<p>Новый дом библиотеки теперь тут - <a href="https://github.com/volyihin/mongeez" class="bare">https://github.com/volyihin/mongeez</a>. Скачать можно так:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-xml" data-lang="xml">&lt;code&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;com.github.volyihin&lt;/groupId&gt;
+  &lt;artifactId&gt;mongeez&lt;/artifactId&gt;
+  &lt;version&gt;0.9.5&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;/code&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>А вот и в самом централе:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../img/maven-central.png" alt="maven central">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Update:</strong>
+Мне только что пришло письмо от Олексия.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../img/mongeez-answer.png" alt="mongeez answer">
+</div>
+</div>
+<div class="paragraph">
+<p>И вот теперь встала дилемма. С одной стороны релиз сделан, и мне не сильно нужна помощь, с другой стороны - совесть.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../img/dreaminess.jpg" alt="dreaminess" width="400px">
+</div>
+</div>
+</div>
 </div></p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/2015/thread_hold_lock.html" data-via="SonOfGarr" data-lang="fr">Tweeter</a>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/2015/maven_central.html" data-via="SonOfGarr" data-lang="fr">Tweeter</a>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/2015/thread_hold_lock.html"></div>
-                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/2015/thread_hold_lock.html" data-counter="right"></script>
-                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/2015/thread_hold_lock.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/2015/maven_central.html"></div>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/2015/maven_central.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/2015/maven_central.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
           </p>
 
           <hr>
