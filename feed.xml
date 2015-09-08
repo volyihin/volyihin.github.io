@@ -1,113 +1,67 @@
 <?xml version="1.0"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>JBake</title>
+    <title>Mike McGarr</title>
     <link>http://jbake.org</link>
     <atom:link href="http://jbake.org/feed.xml" rel="self" type="application/rss+xml" />
-    <description>JBake Bootstrap Template</description>
+    <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Thu, 13 Aug 2015 14:54:36 +0400</pubDate>
-    <lastBuildDate>Thu, 13 Aug 2015 14:54:36 +0400</lastBuildDate>
+    <pubDate>Tue, 8 Sep 2015 14:49:12 +0300</pubDate>
+    <lastBuildDate>Tue, 8 Sep 2015 14:49:12 +0300</lastBuildDate>
 
     <item>
-      <title>Удаление символов из строки</title>
-      <link>http://jbake.org/blog/2015/remove_specified_characters.html</link>
-      <pubDate>Wed, 24 Jun 2015 00:00:00 +0400</pubDate>
-      <guid isPermaLink="false">blog/2015/remove_specified_characters.html</guid>
+      <title>Jquery победил. Пост из прошлого</title>
+      <link>http://jbake.orgblog/2015/jquery_win.html</link>
+      <pubDate>Thu, 13 Aug 2015 00:00:00 +0300</pubDate>
+      <guid isPermaLink="false">blog/2015/jquery_win.html</guid>
       	<description>
 	&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;_Задача&quot;&gt;Задача&lt;/h2&gt;
+&lt;h2 id=&quot;_jquery_победил_Пост_из_прошлого&quot;&gt;&lt;a class=&quot;anchor&quot; href=&quot;#_jquery_победил_Пост_из_прошлого&quot;&gt;&lt;/a&gt;Jquery победил. Пост из прошлого&lt;/h2&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Написать эффективную функцию, которая удалит символы из строки.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;literalblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre&gt;string removeChars( string str, string remove );&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;Попробуйте сверстать одну страничку на&amp;nbsp;html, и&amp;nbsp;вот увидите, что вы&amp;nbsp;обязательно подключили к&amp;nbsp;ней jquery.
+Никакое современное приложение &amp;laquo;не&amp;nbsp;написать&amp;raquo; без jquery. В&amp;nbsp;разумных пределах, конечно.
+Взаимодействие с&amp;nbsp;формой, если вы&amp;nbsp;не&amp;nbsp;безумный верстатель, который делает запросы на&amp;nbsp;формах с&amp;nbsp;инпутами потребует динамики. Сделать что-нибудь на&amp;nbsp;клик по&amp;nbsp;кнопке&amp;nbsp;&amp;mdash; опять динамика. А&amp;nbsp;если есть динамика то&amp;nbsp;нужен javascript.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Любой символ, который содержиться в строке &lt;code&gt;remove&lt;/code&gt; должен быть удален из &lt;code&gt;str&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Изучение javascript часто начинают с&amp;nbsp;jquery, потому что его синтаксис понятен. Не&amp;nbsp;нужно знать программирования, чтобы написать какое-то простейшее действие, jquery использует css селекторы, которые понятны каждому человеку, знакомому с&amp;nbsp;css и&amp;nbsp;html. И&amp;nbsp;так все приложение &amp;laquo;стряпается&amp;raquo; на&amp;nbsp;jquery, а&amp;nbsp;затем когда разработчик умнеет, то&amp;nbsp;переписывать на&amp;nbsp;javascript уже нет смысла, ведь и&amp;nbsp;так работает.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Например, дана строка &lt;code&gt;Battle of the Vowels: Hawaii vs. Grozny&lt;/code&gt;  нужно удалить &lt;code&gt;aeiou&lt;/code&gt;, функция должна вернуть вот такой результат - &lt;code&gt;Bttl f th Vwls: Hw vs. Grzny&lt;/code&gt;. Прокомментировать любое принятое решение в процессе разработки алгоритма и определить эффективность решения.&lt;/p&gt;
-&lt;/div&gt;
-&lt;hr&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Эту задачу можно разделить на две части. Для каждого символа нужно определить - должен ли он быть удален. Потом, само удаление соотвествующего символа. Сначала мы обсудим удаление символа.&lt;/p&gt;
+&lt;p&gt;Ajax.
+Хотя существует даже сайт &lt;a href=&quot;http://youmightnotneedjquery.com/&quot; class=&quot;bare&quot;&gt;http://youmightnotneedjquery.com/&lt;/a&gt;, который как&amp;nbsp;бы призван мотивировать не&amp;nbsp;использовать jquery, но&amp;nbsp;мне кажется он&amp;nbsp;вызывает противоположный эффект. Посмотрите на&amp;nbsp;синтаксис.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Удаление символа из строки алгоритмически эквивалентно удалению элемента из массива. Массив обычно хранится одним сплошным блоком в памяти, так что нельзя просто так удалить элемент из середины, как можно было бы сделать, если это был связный список.&lt;/p&gt;
+&lt;p&gt;Плагины.
+Потребности современного веб-сайта покрываются jquery плагинами. Они правда сниискали наролную любовь. Jquery UI, Jquery Mobile да&amp;nbsp;они есть на&amp;nbsp;каждом третьем сайте.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Вместо этого в массиве нужно переставить элементы таким образом, чтобы  вместо удаляемого элемента сразу шли следующие за ним. Например, если мы хотим удалить символ &lt;code&gt;c&lt;/code&gt; из строки &lt;code&gt;abcd&lt;/code&gt;, то мы можем либо двинуть символы &lt;code&gt;ab&lt;/code&gt; на одну позицию вперед, либо сдвинуть символ &lt;code&gt;d&lt;/code&gt; на одну позицию назад. Оба подхода, конечно, приводят онк одному и тому же результату - &lt;code&gt;abd&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;imageblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;img src=&quot;../../img/Exif.jpg&quot; alt=&quot;Exif&quot;&gt;
-&lt;/div&gt;
+&lt;p&gt;Взаимодействие с&amp;nbsp;фреймворками.
+Пишите вы&amp;nbsp;на&amp;nbsp;angularjs, backbone&amp;nbsp;&amp;mdash; без разницы. Однажды вам потребуется библиотека, вы&amp;nbsp;пойдете гуглить и&amp;nbsp;первым в&amp;nbsp;списке окажется jquery плагин. Так уж&amp;nbsp;сложилось.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Кроме того, что нужно подвинуть данные, также необходимо уменьшить размер строки на один символ. Получается, в первом случае необходимо будет уничтожить первый элемент, а во втором - последний. Во многих языках гораздо легче удалять элемент с конца массива(либо уменьшая длинну строки на один, либо записывая последним элементом &lt;code&gt;null&lt;/code&gt;, в зависимости от языка) чем с начала, поэтому сдвигать символы в начало будет наилучшим вариантом.&lt;/p&gt;
+&lt;p&gt;Я&amp;nbsp;не&amp;nbsp;знаю, что выгонит jquery с&amp;nbsp;этой ниши. ECMAScript 6, Сомневаюсь. Это библиотека пережила уже многие стандарты и&amp;nbsp;порадила целый класс jquery программистов. Как&amp;nbsp;же кривость языка и&amp;nbsp;отстуствие правильных иструментов сыграло на&amp;nbsp;руку, и&amp;nbsp;не&amp;nbsp;отпугнуло.
+Начинаете проект, подключайте jquery сразу.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Каково время работы алгоритма в наихудшем случае, когда нужно удалить все символы в строке str? Для каждого удаления потребуется сдвигать все остальные символы назад на одну позицию Если строка будет длинны &lt;code&gt;n&lt;/code&gt;, то потребуется сдвинуть последний сивол &lt;code&gt;n - 1&lt;/code&gt; раз, предпоследний - &lt;code&gt;n - 2&lt;/code&gt; раза, и так далее, то есть в итоге &apos;O(n^2)&apos; на удаление.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;imageblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;img src=&quot;../../img/Exif.jpg&quot; alt=&quot;Exif&quot;&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Если начать удалять символы строки с конца, то будет немного эффективнее, но сложность останется все равно &lt;code&gt;O(n^2)&lt;/code&gt; в худшем случае. Сдвигать один и тот же символ несколько раз подряд не очень эффективно. Как избежать этого? Что если создать какой-нибудь строковый буфер и произвоть все модификации в нем вместо исходной строки? Затем мы просто сможем копировать символы из буфера, пропуская те символы, которые хотим удалить. Когда закончится построение результирующей строки, то можно просто скопировать ее в исходную. Таким образом каждый символ передвигается как минимум 2 раза, что в итоге дает удаление за &lt;code&gt;O(n)&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Однако мы приобретаем затраты на память этого буфера, который будет такого же размера, как исходная строка, а также затраты на копирование обратно уже итоговой строки.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre&gt;image::../../img/Exif.jpg[]
-
- This way, you move each character at most twice, yielding
-O(n) deletion. However, you’ve incurred the memory overhead of a temporary buffer the same
-size as the original string, and the time overhead of copying the modified string back over the original
-string. Is there any way you can avoid these penalties while retaining your O(n) algorithm?
-To implement the O(n) algorithm just described, you need to track a source position for the read
-location in the original string and a destination position for the write position in the temporary buffer.
-These positions both start at zero. The source position is incremented every time you read, and
-the destination position is incremented every time you write. In other words, when you copy a character,
-you increment both positions, but when you delete a character, you increment only the source
-position. This means the source position is always the same as or ahead of the destination position.
-After you read a character from the original string (that is, the source position has advanced past it),
-you no longer need that character — because you’re just going to copy the modified string over it.
-Because the destination position in the original string is always a character you don’t need anymore,
-you can write directly into the original string, eliminating the temporary buffer entirely. This is still
-an O(n) algorithm but without the memory and time overhead of the earlier version.
-Now that you know how to delete characters, consider the task of deciding whether to delete a particular
-character. The easiest way to do this is to compare the character to each character in remove
-and delete it if it matches any of them. How efficient is this? If str is n characters long and remove is
-m characters long, then in the worst case you make m comparisons for each of n characters, so the
-algorithm is O(nm). You can’t avoid checking each of the n characters in str, but perhaps you can
-make the lookup that determines whether a given character is in remove better than O(m).
-If you’ve already read the solution to “Find the First Nonrepeated Character,” this should sound
-familiar. Just as you did in that problem, you can use remove to build an array or hash table that
-has constant time lookup, thus giving an O(n) solution. The trade-offs between hash tables and
-arrays are the same as previously discussed. In this case, an array is most appropriate when str
-and remove are long and characters have relatively few possible values (for example, ASCII strings).
-A hash table may be a better choice when str and remove are short or characters have many possible
-values (for example, Unicode strings). Either choice could be acceptable as long as you justify it
-appropriately. This time, you’re told that the inputs are ASCII strings, so the array wouldn’t be too
-big; because the previous implementation used a hash table, try using an array for this one.&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;PS. В этой заметке всего лишь 16 раз используется слово jquery, и тут без него никуда.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 	</description>
     </item>
     <item>
+      <title>Удаление символов из строки</title>
+      <link>http://jbake.orgblog/2015/remove_specified_characters.html</link>
+      <pubDate>Wed, 24 Jun 2015 00:00:00 +0300</pubDate>
+      <guid isPermaLink="false">blog/2015/remove_specified_characters.html</guid>
+      	<description>
+	&lt;h2&gt;Задача &lt;/h2&gt;&lt;p&gt;Написать функцию, которая удалит символы из строки.&lt;/p&gt;&lt;p&gt;&lt;code&gt;&lt;br/&gt;string removeChars( string str, string remove );&lt;br/&gt;&lt;/code&gt;&lt;br/&gt;Символы, которые содержатся в //str//, удалить из //remove// .&lt;br/&gt;Пример.&lt;br/&gt; Дана строка //Battle of the Vowels: Hawaii vs. Grozny//.  Удалить //aeiou//. Функция  //removeChars// вернёт такой результат - //Bttl f th Vwls: Hw vs. Grzny//. &lt;/p&gt;&lt;h2&gt;Решение&lt;/h2&gt;&lt;p&gt;Разделим задачу на две части. Для каждого символа определим - удалять ли его? Потом, само удаление соответствующего символа. Сначала мы обсудим удаление символа.&lt;br/&gt;Удаление символа из строки алгоритмически эквивалентно удалению элемента из массива. В памяти массив хранится одним блоком, так что не получится удалить элемент из середины эффективно, как можно было бы сделать со связным списком.&lt;br/&gt;Вместо этого в массиве мы переставим элементы таким образом, чтобы  вместо удаляемого элемента сразу шли следующие за ним. Если мы удалим символ //c// из строки //abcd//, то мы можем либо двинуть символы //ab// на одну позицию вперед, либо сдвинуть символ //d// на одну позицию назад. Оба подхода приводят к одному и тому же результату - //abd//. &lt;br/&gt;Кроме того, подвинув данные, также уменьшим размер строки на один символ. Получается, в первом случае мы уничтожим первый элемент, а во втором - последний. В большинстве языков программирования гораздо легче удалять элемент с конца массива(либо уменьшая длину строки на один, либо записывая последним элементом //null//, в зависимости от языка) чем с начала, поэтому сдвигать символы в начало это наилучший вариант.&lt;br/&gt;Каково время работы алгоритма в наихудшем случае, если мы удалим все символы в строке //str//? Для каждого удаления потребуется сдвигать остальные символы назад на одну позицию. Если строка длинны //n//, то потребуется сдвинуть последний символ //n - 1// раз, предпоследний - //n - 2// раза. В итоге //O(n^2)// на удаление. &lt;br/&gt;Если мы удалим символы строки с конца, то получится немного эффективнее, но сложность останется такая же - //O(n^2)// в худшем случае. Сдвигать один и тот же символ несколько раз подряд не очень эффективно. Попробуем избежать этого. Что если создать строковый буфер и модифицировать его вместо исходной строки? Затем мы копируем символы из буфера, пропуская те символы, которые удалим. Когда закончится построение результирующей строки, то можно скопировать ее в исходную. Каждый символ передвигается как минимум 2 раза, что в итоге дает удаление за //O(n)//.&lt;br/&gt;Однако мы приобретаем затраты на память этого буфера, который размером с исходную строка, и затраты на копирование обратно уже итоговой строки. &lt;/p&gt;&lt;p&gt;Получается, что мы перемещаем каждый символ как минимум дважды, вместо O(n) удаления. Однако, мы несем затраты по памяти на вернменный буфер, который такого же размера как и исходная строка, и затраты на копирование модифицированной строки обратно в исходную. Попробуем избежать этих издержек, но оставить сложность алгоритма O(n).&lt;/p&gt;&lt;p&gt;Для релаизации O(n) алгоритма мы будем следить за позицеей символа в исходной строке и позицией символа в строке-буфере. Обе позиции изначально равны 0.&lt;br/&gt;Значение первой позиции мы увеличим на один, когда будем читать из строки, а значение второй позиции - когда будем записывать в буфер.&lt;/p&gt;&lt;p&gt;Другими словами, когда мы копируем символ, мы увеличваем значения обоих счетчиков на единицу, но когда мы удаляем символ, мы увеличиваем только исходный счетчик. Значит, исходный счетчик имеет либо такое же значение, либо больше чем значние счетчика буфера.&lt;/p&gt;&lt;p&gt;После того, как мы прочитали символ из исходной строки ( счетчик прошел этот символ), мы больше не нуждаемся в этом символе - потому что затем мы скопируем модифицированную строку поверх него.&lt;br/&gt;---------------------&lt;/p&gt;&lt;p&gt;To implement the O(n) algorithm just described, you need to track a source position for the read&lt;br/&gt;location in the original string and a destination position for the write position in the temporary buffer.&lt;br/&gt;These positions both start at zero. &lt;/p&gt;&lt;p&gt;The source position is incremented every time you read, and&lt;br/&gt;the destination position is incremented every time you write. &lt;/p&gt;&lt;p&gt;In other words, when you copy a character,&lt;br/&gt;you increment both positions, but when you delete a character, you increment only the source&lt;br/&gt;position. This means the source position is always the same as or ahead of the destination position.&lt;/p&gt;&lt;p&gt;After you read a character from the original string (that is, the source position has advanced past it),&lt;br/&gt;you no longer need that character — because you’re just going to copy the modified string over it.&lt;/p&gt;&lt;p&gt;Because the destination position in the original string is always a character you don’t need anymore,&lt;br/&gt;you can write directly into the original string, eliminating the temporary buffer entirely. &lt;/p&gt;&lt;p&gt;This is still an O(n) algorithm but without the memory and time overhead of the earlier version.&lt;br/&gt;Now that you know how to delete characters, consider the task of deciding whether to delete a particular&lt;br/&gt;character. &lt;/p&gt;&lt;p&gt;The easiest way to do this is to compare the character to each character in remove&lt;br/&gt;and delete it if it matches any of them. &lt;/p&gt;&lt;p&gt;How efficient is this? If str is n characters long and remove is&lt;br/&gt;m characters long, then in the worst case you make m comparisons for each of n characters, so the&lt;br/&gt;algorithm is O(nm). You can’t avoid checking each of the n characters in str, but perhaps you can&lt;br/&gt;make the lookup that determines whether a given character is in remove better than O(m).&lt;br/&gt;If you’ve already read the solution to “Find the First Nonrepeated Character,” this should sound&lt;br/&gt;familiar. Just as you did in that problem, you can use remove to build an array or hash table that&lt;br/&gt;has constant time lookup, thus giving an O(n) solution. The trade-offs between hash tables and&lt;br/&gt;arrays are the same as previously discussed. In this case, an array is most appropriate when str&lt;br/&gt;and remove are long and characters have relatively few possible values (for example, ASCII strings).&lt;br/&gt;A hash table may be a better choice when str and remove are short or characters have many possible&lt;br/&gt;values (for example, Unicode strings). Either choice could be acceptable as long as you justify it&lt;br/&gt;appropriately. This time, you’re told that the inputs are ASCII strings, so the array wouldn’t be too&lt;br/&gt;big; because the previous implementation used a hash table, try using an array for this one.&lt;/p&gt;
+	</description>
+    </item>
+    <item>
       <title>Groovy. Быстрая сортировка.</title>
-      <link>http://jbake.org/blog/2015/groovy_quicksort.html</link>
-      <pubDate>Mon, 8 Jun 2015 00:00:00 +0400</pubDate>
+      <link>http://jbake.orgblog/2015/groovy_quicksort.html</link>
+      <pubDate>Mon, 8 Jun 2015 00:00:00 +0300</pubDate>
       <guid isPermaLink="false">blog/2015/groovy_quicksort.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -203,8 +157,8 @@ printArr(a)&lt;/code&gt;&lt;/pre&gt;
     </item>
     <item>
       <title>Команда nohup</title>
-      <link>http://jbake.org/blog/2015/nohup.html</link>
-      <pubDate>Tue, 14 Apr 2015 00:00:00 +0400</pubDate>
+      <link>http://jbake.orgblog/2015/nohup.html</link>
+      <pubDate>Tue, 14 Apr 2015 00:00:00 +0300</pubDate>
       <guid isPermaLink="false">blog/2015/nohup.html</guid>
       	<description>
 	&lt;div class=&quot;sect1&quot;&gt;
@@ -235,8 +189,8 @@ printArr(a)&lt;/code&gt;&lt;/pre&gt;
     </item>
     <item>
       <title>Захвачен ли монитор потоком на данный объект</title>
-      <link>http://jbake.org/blog/2015/thread_hold_lock.html</link>
-      <pubDate>Tue, 14 Apr 2015 00:00:00 +0400</pubDate>
+      <link>http://jbake.orgblog/2015/thread_hold_lock.html</link>
+      <pubDate>Tue, 14 Apr 2015 00:00:00 +0300</pubDate>
       <guid isPermaLink="false">blog/2015/thread_hold_lock.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -252,8 +206,8 @@ printArr(a)&lt;/code&gt;&lt;/pre&gt;
     </item>
     <item>
       <title>Обзор книги &quot;Netty in Action&quot;</title>
-      <link>http://jbake.org/blog/2015/netty_in_action.html</link>
-      <pubDate>Thu, 22 Jan 2015 00:00:00 +0400</pubDate>
+      <link>http://jbake.orgblog/2015/netty_in_action.html</link>
+      <pubDate>Thu, 22 Jan 2015 00:00:00 +0300</pubDate>
       <guid isPermaLink="false">blog/2015/netty_in_action.html</guid>
       	<description>
 	&lt;div class=&quot;sect1&quot;&gt;
@@ -939,8 +893,8 @@ Netty предоставляет свою реализацию ByteBuffer, ко�
     </item>
     <item>
       <title>Обзор книги &quot;Learning OpenShift&quot; </title>
-      <link>http://jbake.org/blog/2015/learning_openshift.html</link>
-      <pubDate>Mon, 12 Jan 2015 00:00:00 +0400</pubDate>
+      <link>http://jbake.orgblog/2015/learning_openshift.html</link>
+      <pubDate>Mon, 12 Jan 2015 00:00:00 +0300</pubDate>
       <guid isPermaLink="false">blog/2015/learning_openshift.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -1018,8 +972,8 @@ $ wget https://raw.github.com/gshipley/springmlb/master/mlbparks.json&lt;/code&g
     </item>
     <item>
       <title>Получение метаданых о фотографии</title>
-      <link>http://jbake.org/blog/2014/metaextractor.html</link>
-      <pubDate>Thu, 18 Dec 2014 00:00:00 +0400</pubDate>
+      <link>http://jbake.orgblog/2014/metaextractor.html</link>
+      <pubDate>Thu, 18 Dec 2014 00:00:00 +0300</pubDate>
       <guid isPermaLink="false">blog/2014/metaextractor.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -1138,8 +1092,8 @@ println ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL + &quot;=&quot; + date&lt;/cod
     </item>
     <item>
       <title>Красивишная печать дерева в консоль TreeNode</title>
-      <link>http://jbake.org/blog/2014/print-tree.html</link>
-      <pubDate>Tue, 2 Dec 2014 00:00:00 +0400</pubDate>
+      <link>http://jbake.orgblog/2014/print-tree.html</link>
+      <pubDate>Tue, 2 Dec 2014 00:00:00 +0300</pubDate>
       <guid isPermaLink="false">blog/2014/print-tree.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -1184,8 +1138,8 @@ println ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL + &quot;=&quot; + date&lt;/cod
     </item>
     <item>
       <title>Изменить размер фотографий с помощью groovy и imgscalr</title>
-      <link>http://jbake.org/blog/2014/image-resize-groovy.html</link>
-      <pubDate>Mon, 10 Nov 2014 00:00:00 +0400</pubDate>
+      <link>http://jbake.orgblog/2014/image-resize-groovy.html</link>
+      <pubDate>Mon, 10 Nov 2014 00:00:00 +0300</pubDate>
       <guid isPermaLink="false">blog/2014/image-resize-groovy.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -1269,8 +1223,8 @@ println amount + &quot; images resized&quot;&lt;/code&gt;&lt;/pre&gt;
     </item>
     <item>
       <title>Класс - обёртка</title>
-      <link>http://jbake.org/blog/2014/wrap-class.html</link>
-      <pubDate>Wed, 5 Nov 2014 00:00:00 +0400</pubDate>
+      <link>http://jbake.orgblog/2014/wrap-class.html</link>
+      <pubDate>Wed, 5 Nov 2014 00:00:00 +0300</pubDate>
       <guid isPermaLink="false">blog/2014/wrap-class.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -1356,7 +1310,7 @@ responsibilities of the wrapper and see if the wrapper can become another high-l
     </item>
     <item>
       <title>Метод - обёртка</title>
-      <link>http://jbake.org/blog/2014/wrap-method.html</link>
+      <link>http://jbake.orgblog/2014/wrap-method.html</link>
       <pubDate>Sat, 25 Oct 2014 00:00:00 +0400</pubDate>
       <guid isPermaLink="false">blog/2014/wrap-method.html</guid>
       	<description>
@@ -1495,7 +1449,7 @@ responsibilities of the wrapper and see if the wrapper can become another high-l
     </item>
     <item>
       <title>Ветвление классом</title>
-      <link>http://jbake.org/blog/2014/sprout-class.html</link>
+      <link>http://jbake.orgblog/2014/sprout-class.html</link>
       <pubDate>Tue, 14 Oct 2014 00:00:00 +0400</pubDate>
       <guid isPermaLink="false">blog/2014/sprout-class.html</guid>
       	<description>
@@ -1659,7 +1613,7 @@ public:
     </item>
     <item>
       <title>Ветвление методом</title>
-      <link>http://jbake.org/blog/2014/sprout-method.html</link>
+      <link>http://jbake.orgblog/2014/sprout-method.html</link>
       <pubDate>Tue, 14 Oct 2014 00:00:00 +0400</pubDate>
       <guid isPermaLink="false">blog/2014/sprout-method.html</guid>
       	<description>
@@ -1851,7 +1805,7 @@ public:
     </item>
     <item>
       <title>Обзор книги &quot;Working with legacy code&quot;</title>
-      <link>http://jbake.org/blog/2014/working-with-legacy-code.html</link>
+      <link>http://jbake.orgblog/2014/working-with-legacy-code.html</link>
       <pubDate>Sun, 5 Oct 2014 00:00:00 +0400</pubDate>
       <guid isPermaLink="false">blog/2014/working-with-legacy-code.html</guid>
       	<description>
